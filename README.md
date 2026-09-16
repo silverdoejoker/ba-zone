@@ -36,11 +36,15 @@ ba-zone/
 ├── doc-template-learner-skill/      # [Skill 3] Học cấu trúc từ BRD, URD, SRS, FSD bất kỳ
 │   ├── SKILL.md                     # Hướng dẫn bóc tách Blueprint và sinh tài liệu tương ứng
 │   ├── references/                  # Hướng dẫn chi tiết cho các chuẩn tài liệu lớn
-│   └── templates/                   # Schema Blueprint chuẩn hóa
+├── web-app-uat-skill/               # [Skill 4] Kiểm thử, nghiệm thu (UAT) & trải nghiệm App
+│   ├── SKILL.md                     # Hướng dẫn chi tiết quy trình 8 bước theo TrọBill
+│   ├── templates/                   # Template Kế hoạch & Biên bản nghiệm thu UAT, credentials.json
+│   └── samples/                     # File mẫu báo cáo nghiệm thu chuẩn đầu ra (EN & VI)
 │
 ├── scripts/                         # Bộ công cụ kiểm thử chất lượng tự động (Auditors)
 │   ├── audit_uc.py                  # Script kiểm tra chuẩn 16 trường & quy tắc Cockburn
-│   └── audit_us.py                  # Script kiểm tra tiêu chuẩn INVEST & 3 kịch bản Gherkin
+│   ├── audit_us.py                  # Script kiểm tra tiêu chuẩn INVEST & 3 kịch bản Gherkin
+│   └── audit_uat.py                 # Script kiểm định báo cáo UAT & Live Web App Probe Runner
 │
 ├── audit-all.ps1                    # Master Compounding Loop Auditor (PowerShell runner)
 └── README.md                        # Tài liệu hướng dẫn sử dụng repository
@@ -90,6 +94,18 @@ ba-zone/
 
 ---
 
+### 4. `web-app-uat-skill` — Chuyên Gia Kiểm Thử & Nghiệm Thu App (TrọBill Methodology)
+- **Tiêu chuẩn áp dụng**:
+  - **Quy trình 8 bước nghiệm thu (8-Phase UAT Protocol)**: Pre-flight, Authentication & Session, Multi-Role RBAC, Happy Path, Edge Cases, Negative Scenarios, Responsive Viewports & Console Health, Hardware Isolation & Sign-off.
+  - **Triết lý thực chiến TrọBill**: Token-preserving & Zero Retry Loops, bộ bảo vệ 3 giây cho headless browser, phân lập rõ ràng các ranh giới phần cứng không thể tự động hóa (Camera OCR, Google Play IAP, Android SAF).
+  - **Ma trận quyết định**: Xuất biên bản bàn giao chính thức với khuyến nghị nghiệm thu rõ ràng: `GO`, `NO-GO`, hoặc `CONDITIONAL GO`.
+- **Bộ công cụ tự động hóa**:
+  - `scripts/audit_uat.py`: Chế độ kiểm định biên bản nghiệm thu (`--file`) và Chế độ thăm dò / smoke trực tiếp ứng dụng đang chạy khi có URL & Credentials (`--url`).
+- **Cách kích hoạt**:
+  > *"Mình có URL app và tài khoản admin/pass, hãy thực hiện UAT và xuất biên bản nghiệm thu"*, *"Kiểm thử kịch bản biên và phân quyền RBAC cho tính năng thu tiền phòng"*, *"Audit biên bản UAT này theo chuẩn TrọBill: sample_uat_report_vi.md"*.
+
+---
+
 ## 🌐 Hỗ Trợ Song Ngữ (`output_language`)
 
 Mọi skill đều hỗ trợ biến phiên làm việc `output_language` để kiểm soát ngôn ngữ của tài liệu đầu ra:
@@ -125,6 +141,14 @@ powershell -ExecutionPolicy Bypass -File .\audit-all.ps1
    - Kiểm tra sự hiện diện của bảng tự đánh giá INVEST.
    - Kiểm tra cú pháp Gherkin `Given-When-Then`.
    - Xác thực độ bao phủ đủ 3 loại kịch bản: Happy path, Edge case, Negative path.
+3. **Suite 3: Web App UAT & Live Experience Integrity (`scripts/audit_uat.py`)**
+   - Kiểm tra đủ 8 phần cấu trúc cốt lõi của biên bản nghiệm thu UAT.
+   - Kiểm tra mã định danh Test Case chuẩn `TC-[MODULE]-[NN]`.
+   - Kiểm tra độ bao phủ đầy đủ 3 loại kịch bản: Happy Path, Edge Case, Negative Path.
+   - Kiểm tra phân loại mức độ nghiêm trọng lỗi (Critical, Major, Minor, Trivial).
+   - Xác thực kiểm thử hiển thị đa màn hình (Desktop 1920x1080, Tablet 768x1024, Mobile 375x667).
+   - Kiểm tra trạng thái sạch sẽ của Javascript Console và HTTP Network.
+   - Kiểm tra danh mục phân lập ranh giới phần cứng và quyết định nghiệm thu xuất xưởng (GO / NO-GO).
 
 ---
 
@@ -152,6 +176,15 @@ output_language=en
 Dùng skill doc-template-learner, hãy đọc cấu trúc template từ file:
 use-case-writer-main/BRD_Semantic_Search_527432316.md
 Sau đó viết BRD cho tính năng: "Hệ thống gợi ý khóa học thông minh dựa trên kỹ năng của học viên".
+output_language=vi
+```
+
+#### Kiểm Thử & Nghiệm Thu App (UAT):
+```text
+Dùng skill web-app-uat, mình có ứng dụng TrọBill đang chạy tại:
+URL: http://localhost:8767/app/trobill/uat.html
+Tài khoản: chutro_vip@trobill.vn / MatKhau123! (Vai trò: Landlord / Chủ trọ)
+Hãy kiểm tra luồng đăng nhập, chốt chỉ số điện nước, sinh VietQR và xuất biên bản nghiệm thu UAT chuẩn cho mình.
 output_language=vi
 ```
 
