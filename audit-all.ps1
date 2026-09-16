@@ -12,7 +12,7 @@ Write-Host "Running comprehensive audits to ensure requirements standard..." -Fo
 $global:suiteResults = @()
 $global:allPassed = $true
 
-function Record-Result {
+function Add-Result {
     param (
         [string]$SuiteName,
         [bool]$Passed,
@@ -84,13 +84,13 @@ try {
     }
 
     if ($suiteSuccess) {
-        Record-Result "Use Case Standards (IIBA 16 Fields)" $true "All sample files passed 100%"
+        Add-Result "Use Case Standards (IIBA 16 Fields)" $true "All sample files passed 100%"
     } else {
-        Record-Result "Use Case Standards (IIBA 16 Fields)" $false "Formatting or standard violations detected"
+        Add-Result "Use Case Standards (IIBA 16 Fields)" $false "Formatting or standard violations detected"
     }
 } catch {
     Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Record-Result "Use Case Standards (IIBA 16 Fields)" $false $_.Exception.Message
+    Add-Result "Use Case Standards (IIBA 16 Fields)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
@@ -122,13 +122,13 @@ try {
     }
 
     if ($suiteSuccess) {
-        Record-Result "User Story & AC (INVEST + Gherkin)" $true "All sample files passed 100%"
+        Add-Result "User Story & AC (INVEST + Gherkin)" $true "All sample files passed 100%"
     } else {
-        Record-Result "User Story & AC (INVEST + Gherkin)" $false "Formatting or standard violations detected"
+        Add-Result "User Story & AC (INVEST + Gherkin)" $false "Formatting or standard violations detected"
     }
 } catch {
     Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Record-Result "User Story & AC (INVEST + Gherkin)" $false $_.Exception.Message
+    Add-Result "User Story & AC (INVEST + Gherkin)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
