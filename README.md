@@ -23,30 +23,33 @@ Repository này cung cấp hệ sinh thái kỹ năng AI (Antigravity Skills) v�
 
 ```text
 ba-zone/
-├── use-case-writer-skill/           # [Skill 1] Đặc tả Use Case chuẩn IIBA 16 trường
-│   ├── SKILL.md                     # Hướng dẫn chi tiết & workflow cho AI
-│   ├── templates/                   # Template Use Case song ngữ EN & VI
-│   └── samples/                     # File mẫu chuẩn đầu ra (sample_uc_en, sample_uc_vi)
+├── .agents/                         # Sổ tay quản lý AI Agents & Kỹ năng
+│   ├── skills/                      # Nơi đăng ký tự động các AI Skills
+│   │   ├── doc-template-learner-skill/
+│   │   ├── enterprise-nda-sanitizer/
+│   │   ├── use-case-writer-skill/
+│   │   ├── user-story-writer-skill/
+│   │   └── web-app-uat-skill/
+│   └── AGENTS.md                    # Registry & Hướng dẫn sử dụng Skills
 │
-├── user-story-writer-skill/         # [Skill 2] Viết User Story & AC chuẩn INVEST + Gherkin
-│   ├── SKILL.md                     # Hướng dẫn chi tiết & workflow cho AI
-│   ├── templates/                   # Template Story & AC song ngữ EN & VI
-│   └── samples/                     # File mẫu chuẩn đầu ra (sample_us_en, sample_us_vi)
+├── docs/                            # Thư viện tài liệu & Knowledge Base
+│   ├── templates/                   # 19+ File mẫu chuẩn: BRD, Use Cases, User Stories, UAT Reports, PDF/DOCX
+│   │   └── README.md                # Master Catalog & Index tra cứu biểu mẫu
+│   ├── guidelines/                  # Bộ cẩm nang: INVEST, Cockburn Style, 20-Point Quality Checklists
+│   └── inputs/                      # Tài liệu đầu vào gốc (được bảo vệ bởi .gitignore)
 │
-├── doc-template-learner-skill/      # [Skill 3] Học cấu trúc từ BRD, URD, SRS, FSD bất kỳ
-│   ├── SKILL.md                     # Hướng dẫn bóc tách Blueprint và sinh tài liệu tương ứng
-│   ├── references/                  # Hướng dẫn chi tiết cho các chuẩn tài liệu lớn
-├── web-app-uat-skill/               # [Skill 4] Kiểm thử, nghiệm thu (UAT) & trải nghiệm App
-│   ├── SKILL.md                     # Hướng dẫn chi tiết quy trình 8 bước theo TrọBill
-│   ├── templates/                   # Template Kế hoạch & Biên bản nghiệm thu UAT, credentials.json
-│   └── samples/                     # File mẫu báo cáo nghiệm thu chuẩn đầu ra (EN & VI)
+├── prototypes/                      # Khu vực Interactive Mockup / UI Prototype (Không commit Git)
+├── artifacts/                       # Thư mục chứa tài liệu đặc tả hoàn thiện xuất ra từ AI Skills
+├── scratch/                         # Vùng nháp tạm thời (Scratchpad - Drop sau khi hoàn thành task)
 │
 ├── scripts/                         # Bộ công cụ kiểm thử chất lượng tự động (Auditors)
+│   ├── audit_hygiene.py             # Script kiểm định chống rò rỉ mockup build & bảo vệ NDA
 │   ├── audit_uc.py                  # Script kiểm tra chuẩn 16 trường & quy tắc Cockburn
 │   ├── audit_us.py                  # Script kiểm tra tiêu chuẩn INVEST & 3 kịch bản Gherkin
 │   └── audit_uat.py                 # Script kiểm định báo cáo UAT & Live Web App Probe Runner
 │
 ├── audit-all.ps1                    # Master Compounding Loop Auditor (PowerShell runner)
+├── CHANGELOG.md                     # Lịch sử phiên bản & thay đổi
 └── README.md                        # Tài liệu hướng dẫn sử dụng repository
 ```
 

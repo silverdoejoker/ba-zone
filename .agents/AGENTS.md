@@ -31,6 +31,14 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
   - Hardware Isolation Registry (Manual check boundary for Camera OCR, Google Play/Apple IAP, Biometrics/SAF).
   - Generates comprehensive UAT Acceptance reports and GO/NO-GO release decisions.
 
+### 5. `enterprise-nda-sanitizer`
+- **Location:** `.agents/skills/enterprise-nda-sanitizer/`
+- **Description:** Tự động ẩn danh hóa (Sanitize / Generalize) toàn bộ thực thể doanh nghiệp nhạy cảm khi viết tài liệu, specs và báo cáo kiến trúc hệ thống.
+- **Core Capability:** 
+  - Triết lý: "Generalize by Default, Specialize only on Export".
+  - Ánh xạ tự động: Tên tập đoàn ➔ MegaCorp / RetailCorp, Vendor ➔ TechPartner, Mã định danh hợp đồng ➔ REF-XXX, URLs/IPs nội bộ ➔ example.com.
+  - Cờ điều khiển: `official_export=true` chỉ bật khi xuất bản bàn giao chính thức cho khách hàng.
+
 ---
 
 ## Strict Repository Policy: Documentation Only (Zero Prototype/Build Leakage)

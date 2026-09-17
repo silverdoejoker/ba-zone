@@ -26,10 +26,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
     - `web-app-uat-skill`
 - **NDA & Confidential Documents Protection**:
   - Updated `.gitignore` to block all raw enterprise client documents (`docs/inputs/*`, `*.docx`, `*.pdf`, `use-case-writer-main/`, `user-story-ac-writer-main/`).
+  - Added temporary ignore rule for `docs/NLE_CLARIFICATION_AGENDA_AND_GAP_CHECKLIST.md` to preserve user's working notes locally while completely excluding from Git.
+  - Sanitized all pending reports: `docs/CR_LEASING_GAP_ANALYSIS_REPORT.md`, `docs/LEASING_MANAGEMENT_AS_IS_SUMMARY.md`, and `docs/URD_GMS_SYSTEM_CONTEXT_REPORT.md` (generalized all client entities: MegaCorp, RetailLease, AssetMgmt, REF-GMS-2026).
   - Guarantees signed agreements, corporate URLs, internal IPs, and PII can never be leaked to Git.
-- **Sanitized BRD Reference Template**:
-  - Reverse-engineered and sanitized the Semantic Search BRD into `docs/templates/brd_semantic_search_template.md`.
-  - Stripped all confidential company references, internal URLs, and personal identities while preserving 100% of the structural blueprint, search pipeline, tech stack, and business scoring formulas for BA training.
+- **Centralized Templates & References Library (`docs/templates/`)**:
+  - Consolidated all template types (.docx, .pdf, .md, .json) into `docs/templates/` with master catalog [`README.md`](file:///d:/repo/ba-zone/docs/templates/README.md):
+    - Enterprise Client References: `[signed]3.URD_GMS_Full_Final 23.03.26.pdf`, `NLE-IT-Yeu cau PTUD-100926.pdf` (and raw Word originals in `docs/inputs/`).
+    - Standard Specification Templates: `template_blueprint_schema.md`, `template_use_case_16_fields.md`, `template_user_story_invest.md`, `template_acceptance_criteria_gherkin.md`, `template_uat_test_plan.md`, `template_uat_acceptance_report.md`.
+    - Real-World Reference Samples: `brd_semantic_search_template.md`, `sample_use_case_contract_flow.md`, `sample_use_case_en.md`, `sample_use_case_vi.md`, `sample_user_story_en.md`, `sample_user_story_vi.md`, `sample_user_stories_epics.md`, `sample_uat_report_en.md`, `sample_uat_report_vi.md`, `sample_uat_credentials.json`.
+  - Established BA Guidelines & Checklists Library (`docs/guidelines/`):
+    - `blueprint_extraction_guide.md`: Reverse-engineering guide for BRD, URD, SRS, FSD archetypes & 5 structural parity rules.
+    - `use_case_quality_checklist.md`: 20-point Karl Wiegers & Alistair Cockburn quality checklist.
+    - `use_case_writing_style.md`: Readability-first principles, active voice, and step granularity rules.
+    - `invest_criteria_guide.md`: 6 INVEST criteria with anti-patterns and 6 splitting patterns.
+    - `user_story_quality_checklist.md`: Pre-commit self-review checklist for User Stories and Gherkin ACs.
+  - Complete NDA protection maintained: Raw binary `.docx` and `.pdf` files remain safely ignored in `.gitignore` to prevent accidental Git commit.
 - **Scratch Script Lifecycle & Cleanup Policy**:
   - Established rule for temporary scripts in `scratch/`: must undergo post-task assessment (Keep vs Drop).
   - Scripts with long-term reuse are promoted to `scripts/`; one-off debug scripts must be dropped to prevent repository clutter.

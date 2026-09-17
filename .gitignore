@@ -74,3 +74,6 @@ docs/templates/*.pdf
 use-case-writer-main/
 user-story-ac-writer-main/
 
+# Local un-sanitized client working checklist & agenda (temporary ignore)
+docs/NLE_CLARIFICATION_AGENDA_AND_GAP_CHECKLIST.md
+
