@@ -21,6 +21,10 @@ FORBIDDEN_TRACKED_PATTERNS = [
     ("prototypes/", [".gitkeep"]),
     ("mockups/", [".gitkeep"]),
     ("scratch/", [".gitkeep"]),
+    ("artifacts/", [".gitkeep"]),
+    ("docs/inputs/", [".gitkeep"]),
+    ("docs/outputs/", [".gitkeep"]),
+    ("docs/projects/", [".gitkeep"]),
     ("dist/", []),
     ("build/", []),
     ("out/", []),
@@ -72,7 +76,11 @@ def check_gitignore_rules(repo_root):
         "dist/",
         "build/",
         "node_modules/",
-        "scratch/*"
+        "scratch/*",
+        "artifacts/*",
+        "docs/inputs/*",
+        "docs/outputs/*",
+        "docs/projects/*"
     ]
     
     missing_rules = []

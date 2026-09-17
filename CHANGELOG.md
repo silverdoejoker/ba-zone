@@ -24,11 +24,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
     - `use-case-writer-skill`
     - `user-story-writer-skill`
     - `web-app-uat-skill`
-- **NDA & Confidential Documents Protection**:
-  - Updated `.gitignore` to block all raw enterprise client documents (`docs/inputs/*`, `*.docx`, `*.pdf`, `use-case-writer-main/`, `user-story-ac-writer-main/`).
-  - Added temporary ignore rule for `docs/4.NLE-IT-Yeu cau PTUD-100926_Clarification_Checklist.md` to preserve user's working notes locally while completely excluding from Git.
-  - Sanitized all pending reports: `docs/CR_LEASING_GAP_ANALYSIS_REPORT.md`, `docs/LEASING_MANAGEMENT_AS_IS_SUMMARY.md`, and `docs/URD_GMS_SYSTEM_CONTEXT_REPORT.md` (generalized all client entities: MegaCorp, RetailLease, AssetMgmt, REF-GMS-2026).
-  - Guarantees signed agreements, corporate URLs, internal IPs, and PII can never be leaked to Git.
+- **Enterprise NDA & Confidential Client Isolation**:
+  - Updated `.gitignore` to strictly isolate all raw inputs, client projects, and working outputs (`docs/inputs/*`, `docs/outputs/*`, `docs/projects/*`, `artifacts/*` except `.gitkeep`).
+  - Added wildcard ignore patterns for client-specific materials (`*NLE*`, `*Clarification*`, `*URD*`, `*LEASING*`, `*TRAINING*`, `*TAS*`).
+  - Permanently blocked all office binaries across the repo (`*.docx`, `*.doc`, `*.pdf`, `*.xlsx`, `*.xls`, `*.pptx`, `*.ppt`, `*.vsdx`).
+  - Enhanced repository hygiene auditor (`scripts/audit_hygiene.py`) to verify that no files under `docs/inputs/`, `docs/outputs/`, `docs/projects/`, or `artifacts/` are ever tracked in Git.
+  - Guaranteed zero data leakage: Real corporate entities, stakeholder PII, internal emails (`@novagroup.vn`), and customer specifications remain strictly local on the user's workstation.
 - **Centralized Templates & References Library (`docs/templates/`)**:
   - Consolidated all template types (.docx, .pdf, .md, .json) into `docs/templates/` with master catalog [`README.md`](file:///d:/repo/ba-zone/docs/templates/README.md):
     - Enterprise Client References: `[signed]3.URD_GMS_Full_Final 23.03.26.pdf`, `NLE-IT-Yeu cau PTUD-100926.pdf` (and raw Word originals in `docs/inputs/`).

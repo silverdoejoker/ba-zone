@@ -63,20 +63,50 @@ coverage/
 __pycache__/
 *.pyc
 
+artifacts/*
+!artifacts/.gitkeep
+
 # ==============================================================================
-# NDA & CONFIDENTIAL DOCUMENTATION PROTECTION (LOCAL INPUTS ONLY)
-# Never commit raw company/client inputs, signed documents, or heavy binary files.
+# NDA & CONFIDENTIAL CLIENT DOCUMENTATION (LOCAL WORKING ONLY - NEVER COMMIT)
+# Strict policy: "Generalize by default, specialize only on export" (Zero Leakage)
 # ==============================================================================
+# Raw incoming client documents, contracts, signed specifications
 docs/inputs/*
 !docs/inputs/.gitkeep
-docs/templates/*.docx
-docs/templates/*.pdf
+
+# Local generated client reports, agendas, checklists & outputs
+docs/outputs/*
+!docs/outputs/.gitkeep
+
+# Specific client project workspaces & internal implementation artifacts
+docs/projects/*
+!docs/projects/.gitkeep
+
+# Client-specific patterns & working files
+docs/*NLE*
+docs/**/*NLE*
+docs/*Clarification*
+docs/**/*Clarification*
+docs/*URD*
+docs/**/*URD*
+docs/*LEASING*
+docs/**/*LEASING*
+docs/*TRAINING*
+docs/**/*TRAINING*
+docs/*TAS*
+docs/**/*TAS*
+
+# Office binaries, PDFs, and drawing files (never commit raw client binaries)
 *.docx
+*.doc
 *.pdf
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+*.vsdx
+
+# Sub-repositories and legacy working archives
 use-case-writer-main/
 user-story-ac-writer-main/
-
-# Local un-sanitized client working checklist & agenda (temporary ignore)
-docs/4.NLE-IT-Yeu cau PTUD-100926_Clarification_Checklist.md
-docs/NLE_CLARIFICATION_AGENDA_AND_GAP_CHECKLIST.md
 
