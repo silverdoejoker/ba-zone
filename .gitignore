@@ -60,3 +60,17 @@ coverage/
 .pytest_cache/
 __pycache__/
 *.pyc
+
+# ==============================================================================
+# NDA & CONFIDENTIAL DOCUMENTATION PROTECTION (LOCAL INPUTS ONLY)
+# Never commit raw company/client inputs, signed documents, or heavy binary files.
+# ==============================================================================
+docs/inputs/*
+!docs/inputs/.gitkeep
+docs/templates/*.docx
+docs/templates/*.pdf
+*.docx
+*.pdf
+use-case-writer-main/
+user-story-ac-writer-main/
+

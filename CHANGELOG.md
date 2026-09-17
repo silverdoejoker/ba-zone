@@ -24,6 +24,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
     - `use-case-writer-skill`
     - `user-story-writer-skill`
     - `web-app-uat-skill`
+- **NDA & Confidential Documents Protection**:
+  - Updated `.gitignore` to block all raw enterprise client documents (`docs/inputs/*`, `*.docx`, `*.pdf`, `use-case-writer-main/`, `user-story-ac-writer-main/`).
+  - Guarantees signed agreements, corporate URLs, internal IPs, and PII can never be leaked to Git.
+- **Sanitized BRD Reference Template**:
+  - Reverse-engineered and sanitized the Semantic Search BRD into `docs/templates/brd_semantic_search_template.md`.
+  - Stripped all confidential company references, internal URLs, and personal identities while preserving 100% of the structural blueprint, search pipeline, tech stack, and business scoring formulas for BA training.
 - **Scratch Script Lifecycle & Cleanup Policy**:
   - Established rule for temporary scripts in `scratch/`: must undergo post-task assessment (Keep vs Drop).
   - Scripts with long-term reuse are promoted to `scripts/`; one-off debug scripts must be dropped to prevent repository clutter.
