@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
     - `web-app-uat-skill`
 - **NDA & Confidential Documents Protection**:
   - Updated `.gitignore` to block all raw enterprise client documents (`docs/inputs/*`, `*.docx`, `*.pdf`, `use-case-writer-main/`, `user-story-ac-writer-main/`).
-  - Added temporary ignore rule for `docs/NLE_CLARIFICATION_AGENDA_AND_GAP_CHECKLIST.md` to preserve user's working notes locally while completely excluding from Git.
+  - Added temporary ignore rule for `docs/4.NLE-IT-Yeu cau PTUD-100926_Clarification_Checklist.md` to preserve user's working notes locally while completely excluding from Git.
   - Sanitized all pending reports: `docs/CR_LEASING_GAP_ANALYSIS_REPORT.md`, `docs/LEASING_MANAGEMENT_AS_IS_SUMMARY.md`, and `docs/URD_GMS_SYSTEM_CONTEXT_REPORT.md` (generalized all client entities: MegaCorp, RetailLease, AssetMgmt, REF-GMS-2026).
   - Guarantees signed agreements, corporate URLs, internal IPs, and PII can never be leaked to Git.
 - **Centralized Templates & References Library (`docs/templates/`)**:
