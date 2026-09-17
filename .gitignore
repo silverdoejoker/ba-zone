@@ -50,6 +50,8 @@ scratch/*
 
 # Environment & local secrets
 .env
+.env/
+.env/*
 .env.local
 .env.*.local
 credentials.json
