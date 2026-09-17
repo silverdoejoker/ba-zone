@@ -125,7 +125,7 @@ Mọi skill đều hỗ trợ biến phiên làm việc `output_language` để 
 Repository tích hợp sẵn kịch bản kiểm thử tự động theo tiêu chuẩn **Compounding Loop** (tương tự tiêu chuẩn tại dự án TrọBill) nhằm bảo đảm chất lượng tài liệu sinh ra luôn đáp ứng 100% tiêu chuẩn IIBA và Agile:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\audit-all.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\audit-all.ps1
 ```
 
 ### Các Suite Kiểm Thử:

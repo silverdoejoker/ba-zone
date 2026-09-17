@@ -8,6 +8,9 @@ Write-Host "         COMPOUNDING LOOP MASTER AUDITOR (BA ZONE)          " -Foreg
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "Running comprehensive audits to ensure requirements standard..." -ForegroundColor Gray
 
+# Root of the ba-zone repository (parent directory of scripts/)
+$RepoRoot = Split-Path $PSScriptRoot -Parent
+
 # Array to store results of each suite
 $global:suiteResults = @()
 $global:allPassed = $true
@@ -56,14 +59,34 @@ if (-not $pythonExe) {
 }
 
 # ----------------------------------------------------------------------
-# SUITE 1: Use Case Standard & Format Integrity (Karl Wiegers / IIBA 16 Fields)
+# SUITE 1: Repository Hygiene & No Prototype/Build Committed Policy
 # ----------------------------------------------------------------------
-Write-Host "`n[1/3] Auditing Use Case Template & Quality Integrity (scripts/audit_uc.py)..." -ForegroundColor White
+Write-Host "`n[1/4] Auditing Repo Hygiene & Leak Prevention (scripts/audit_hygiene.py)..." -ForegroundColor White
 try {
-    $scriptPath = Join-Path $PSScriptRoot "scripts\audit_uc.py"
+    $scriptPath = Join-Path $PSScriptRoot "audit_hygiene.py"
+    $output = & $pythonExe $scriptPath 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "  -> FAIL: Repository hygiene or prototype leakage detected!" -ForegroundColor Red
+        Write-Host $output
+        Add-Result "Repo Hygiene & No Prototype Builds" $false "Forbidden files tracked or .gitignore rule missing"
+    } else {
+        Write-Host "  -> PASS: Repository is clean, 0 prototype/build files tracked in Git." -ForegroundColor Green
+        Add-Result "Repo Hygiene & No Prototype Builds" $true "100% compliant (.gitignore & git index clean)"
+    }
+} catch {
+    Write-Host "  -> ERROR: $_" -ForegroundColor Red
+    Add-Result "Repo Hygiene & No Prototype Builds" $false $_.Exception.Message
+}
+
+# ----------------------------------------------------------------------
+# SUITE 2: Use Case Standard & Format Integrity (Karl Wiegers / IIBA 16 Fields)
+# ----------------------------------------------------------------------
+Write-Host "`n[2/4] Auditing Use Case Template & Quality Integrity (scripts/audit_uc.py)..." -ForegroundColor White
+try {
+    $scriptPath = Join-Path $PSScriptRoot "audit_uc.py"
     $testFiles = @(
-        (Join-Path $PSScriptRoot "use-case-writer-skill\samples\sample_uc_en.md"),
-        (Join-Path $PSScriptRoot "use-case-writer-skill\samples\sample_uc_vi.md")
+        (Join-Path $RepoRoot "use-case-writer-skill\samples\sample_uc_en.md"),
+        (Join-Path $RepoRoot "use-case-writer-skill\samples\sample_uc_vi.md")
     )
 
     $suiteSuccess = $true
@@ -94,14 +117,14 @@ try {
 }
 
 # ----------------------------------------------------------------------
-# SUITE 2: User Story & AC Specification Integrity (INVEST + Gherkin)
+# SUITE 3: User Story & AC Specification Integrity (INVEST + Gherkin)
 # ----------------------------------------------------------------------
-Write-Host "`n[2/3] Auditing User Story & AC Specification Integrity (scripts/audit_us.py)..." -ForegroundColor White
+Write-Host "`n[3/4] Auditing User Story & AC Specification Integrity (scripts/audit_us.py)..." -ForegroundColor White
 try {
-    $scriptPath = Join-Path $PSScriptRoot "scripts\audit_us.py"
+    $scriptPath = Join-Path $PSScriptRoot "audit_us.py"
     $testFiles = @(
-        (Join-Path $PSScriptRoot "user-story-writer-skill\samples\sample_us_en.md"),
-        (Join-Path $PSScriptRoot "user-story-writer-skill\samples\sample_us_vi.md")
+        (Join-Path $RepoRoot "user-story-writer-skill\samples\sample_us_en.md"),
+        (Join-Path $RepoRoot "user-story-writer-skill\samples\sample_us_vi.md")
     )
 
     $suiteSuccess = $true
@@ -132,14 +155,14 @@ try {
 }
 
 # ----------------------------------------------------------------------
-# SUITE 3: Web App UAT & Live Experience Integrity (scripts/audit_uat.py)
+# SUITE 4: Web App UAT & Live Experience Integrity (scripts/audit_uat.py)
 # ----------------------------------------------------------------------
-Write-Host "`n[3/3] Auditing Web App UAT & Live Experience Integrity (scripts/audit_uat.py)..." -ForegroundColor White
+Write-Host "`n[4/4] Auditing Web App UAT & Live Experience Integrity (scripts/audit_uat.py)..." -ForegroundColor White
 try {
-    $scriptPath = Join-Path $PSScriptRoot "scripts\audit_uat.py"
+    $scriptPath = Join-Path $PSScriptRoot "audit_uat.py"
     $testFiles = @(
-        (Join-Path $PSScriptRoot "web-app-uat-skill\samples\sample_uat_report_en.md"),
-        (Join-Path $PSScriptRoot "web-app-uat-skill\samples\sample_uat_report_vi.md")
+        (Join-Path $RepoRoot "web-app-uat-skill\samples\sample_uat_report_en.md"),
+        (Join-Path $RepoRoot "web-app-uat-skill\samples\sample_uat_report_vi.md")
     )
 
     $suiteSuccess = $true

@@ -33,19 +33,35 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
 
 ---
 
-## Quality Audits & Compounding Verification (`audit-all.ps1`)
+## Strict Repository Policy: Documentation Only (Zero Prototype/Build Leakage)
+- **Repository Boundary**: This repository is strictly for Business Analysis specifications, PRD/BRD documents, test plans, and templates.
+- **Prototypes & Mockups**: All interactive prototypes or mockup files built under `prototypes/`, `mockups/`, or build bundles (`dist/`, `build/`, `node_modules/`) must **NEVER** be committed to Git.
+- **Enforcement**: Automated audit script `scripts/audit_hygiene.py` runs in `audit-all.ps1` to detect and block any accidental commits of prototype files.
+
+## Scratch Script Lifecycle & Cleanup Policy (`scratch/`)
+- **Tạo script tạm**: Mọi script phân tích raw data, cào dữ liệu mẫu, hoặc debug tạm thời trong quá trình thực thi phải được tạo trong `scratch/`.
+- **Đánh giá sau khi Done Task (Post-Task Assessment)**:
+  - Khi hoàn thành task, Agent & Người dùng **BẮT BUỘC** đánh giá giá trị tái sử dụng của script đó.
+  - **Nếu có giá trị lâu dài (Keep)**: Di chuyển, chuẩn hóa tài liệu và đưa vào `scripts/` (đồng thời đăng ký vào bộ audit nếu cần).
+  - **Nếu dùng một lần / phục vụ debug cục bộ (Drop)**: Xóa bỏ (`drop/delete`) ngay lập tức khỏi `scratch/` để giữ repository sạch sẽ, chỉ giữ lại file `.gitkeep`.
+- **Chặn commit Git**: Thư mục `scratch/*` luôn nằm trong `.gitignore` để đảm bảo không bao giờ bị rò rỉ lên remote repository.
+
+---
+
+## Quality Audits & Compounding Verification (`scripts/audit-all.ps1`)
 
 The workspace includes automated quality auditor scripts under `scripts/` to enforce 100% compliance across all skills and generated artifacts:
 
-| Auditor Script | Target Standard | Skill Audited |
+| Auditor Script | Target Standard | Skill / Policy Audited |
 |---|---|---|
+| `scripts/audit_hygiene.py` | Zero Prototype / Build Leakage Policy | Repository Cleanliness & `.gitignore` Integrity |
 | `scripts/audit_uc.py` | Karl Wiegers / IIBA 16-Field Template Integrity | `use-case-writer-skill` |
 | `scripts/audit_us.py` | INVEST Principles & 3-Scenario Gherkin Syntax | `user-story-writer-skill` |
 | `scripts/audit_uat.py` | 8-Phase Protocol, Test Matrix, & Hardware Registry | `web-app-uat-skill` |
 
 ### Running the Master Audit Suite:
 ```powershell
-./audit-all.ps1
+./scripts/audit-all.ps1
 ```
 
 ---

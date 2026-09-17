@@ -13,6 +13,24 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# ==============================================================================
+# PROTOTYPES & MOCKUPS POLICY: NEVER COMMIT BUILDS / PROTOTYPES
+# This repository is strictly for Business Analysis, Specifications & Documentation.
+# All prototype builds, mockups, bundles, and local test runtimes are completely ignored.
+# ==============================================================================
+prototypes/*
+!prototypes/.gitkeep
+mockups/*
+!mockups/.gitkeep
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+.parcel-cache/
+node_modules/
+
 # Scratch and temporary work notes
 scratch/*
 !scratch/.gitkeep
