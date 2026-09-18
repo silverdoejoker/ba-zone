@@ -247,19 +247,38 @@ After filling in all 13 fields and saving the Goal form, the HR system requires 
 | 3 | **Nhân viên** | Điền **Nhận xét** (optional) → Nhấn **"Gửi QLTT phê duyệt"** | Biểu mẫu chuyển tiếp đến QLTT (Quản lý trực tiếp) |
 | 4 | **QLTT** | Review → **Phê duyệt** hoặc **Từ chối** (trả lại kèm nhận xét) | Nếu từ chối: Nhân viên chỉnh sửa và gửi lại |
 
-### Suggested "Nhận xét" Template (Copy-paste ready)
+### Suggested "Nhận xét" Templates (Copy-paste ready)
 
-When submitting for approval, agent SHOULD generate a concise comment summarizing the KPI scope:
+When submitting for approval, agent SHOULD generate a concise comment summarizing the KPI scope.
+Choose the appropriate variant based on context:
 
+#### Variant A: Standard Submission (Đã chốt nội dung)
 ```
 Kính gửi Anh/Chị,
 
-Em gửi KPI thử việc gồm [X] mục tiêu cho [X] dự án song song:
+Em gửi KPI [thử việc/quý X/năm YYYY] gồm [X] mục tiêu cho [X] dự án song song:
 1. [Tên DA 1] (Trọng số [XX]%): [Tóm tắt deliverables chính]
 2. [Tên DA 2] (Trọng số [XX]%): [Tóm tắt deliverables chính]
 [3. Nhiệm vụ ad-hoc / hỗ trợ phát sinh (Trọng số [XX]%)]
 
 Tổng trọng số: 100%. Kính nhờ Anh/Chị review và phê duyệt.
+Trân trọng.
+```
+
+#### Variant B: Deadline-Aware Draft Submission (Gửi trước deadline, nhờ feedback)
+> Use this when today is the SF deadline and the employee needs to submit on time 
+> but content is still a first draft awaiting manager's input.
+
+```
+Kính gửi Anh/Chị,
+
+Do hôm nay là deadline set KPI trên SuccessFactors nên em xin gửi trước bản KPI v1 (draft) gồm [X] mục tiêu cho [X] dự án song song:
+1. [Tên DA 1] (Trọng số [XX]%): [Tóm tắt deliverables chính]
+2. [Tên DA 2] (Trọng số [XX]%): [Tóm tắt deliverables chính]
+[3. Nhiệm vụ ad-hoc / hỗ trợ phát sinh (Trọng số [XX]%)]
+
+Tổng trọng số: 100%.
+Kính nhờ Anh/Chị review và cho feedback để em chỉnh sửa, bổ sung thêm ạ.
 Trân trọng.
 ```
 
