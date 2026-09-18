@@ -61,7 +61,7 @@ if (-not $pythonExe) {
 # ----------------------------------------------------------------------
 # SUITE 1: Repository Hygiene & No Prototype/Build Committed Policy
 # ----------------------------------------------------------------------
-Write-Host "`n[1/4] Auditing Repo Hygiene & Leak Prevention (scripts/audit_hygiene.py)..." -ForegroundColor White
+Write-Host "`n[1/5] Auditing Repo Hygiene & Leak Prevention (scripts/audit_hygiene.py)..." -ForegroundColor White
 try {
     $scriptPath = Join-Path $PSScriptRoot "audit_hygiene.py"
     $output = & $pythonExe $scriptPath 2>&1
@@ -81,7 +81,7 @@ try {
 # ----------------------------------------------------------------------
 # SUITE 2: Use Case Standard & Format Integrity (Karl Wiegers / IIBA 16 Fields)
 # ----------------------------------------------------------------------
-Write-Host "`n[2/4] Auditing Use Case Template & Quality Integrity (scripts/audit_uc.py)..." -ForegroundColor White
+Write-Host "`n[2/5] Auditing Use Case Template & Quality Integrity (scripts/audit_uc.py)..." -ForegroundColor White
 try {
     $scriptPath = Join-Path $PSScriptRoot "audit_uc.py"
     $testFiles = @(
@@ -119,7 +119,7 @@ try {
 # ----------------------------------------------------------------------
 # SUITE 3: User Story & AC Specification Integrity (INVEST + Gherkin)
 # ----------------------------------------------------------------------
-Write-Host "`n[3/4] Auditing User Story & AC Specification Integrity (scripts/audit_us.py)..." -ForegroundColor White
+Write-Host "`n[3/5] Auditing User Story & AC Specification Integrity (scripts/audit_us.py)..." -ForegroundColor White
 try {
     $scriptPath = Join-Path $PSScriptRoot "audit_us.py"
     $testFiles = @(
@@ -157,7 +157,7 @@ try {
 # ----------------------------------------------------------------------
 # SUITE 4: Web App UAT & Live Experience Integrity (scripts/audit_uat.py)
 # ----------------------------------------------------------------------
-Write-Host "`n[4/4] Auditing Web App UAT & Live Experience Integrity (scripts/audit_uat.py)..." -ForegroundColor White
+Write-Host "`n[4/5] Auditing Web App UAT & Live Experience Integrity (scripts/audit_uat.py)..." -ForegroundColor White
 try {
     $scriptPath = Join-Path $PSScriptRoot "audit_uat.py"
     $testFiles = @(
@@ -190,6 +190,31 @@ try {
 } catch {
     Write-Host "  -> ERROR: $_" -ForegroundColor Red
     Add-Result "Web App UAT (TrọBill Methodology)" $false $_.Exception.Message
+}
+
+# ----------------------------------------------------------------------
+# SUITE 5: Real Output Documents Quality & Standard Integrity (scripts/audit_outputs.py)
+# ----------------------------------------------------------------------
+Write-Host "`n[5/5] Auditing Real Output Documents & Standards (scripts/audit_outputs.py)..." -ForegroundColor White
+try {
+    $scriptPath = Join-Path $PSScriptRoot "audit_outputs.py"
+    if (Test-Path $scriptPath) {
+        $output = & $pythonExe $scriptPath 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  -> FAIL: Output documents failed standard compliance!" -ForegroundColor Red
+            Write-Host $output
+            Add-Result "Output Documents Standards (AM/BRD/NDA)" $false "Discrepancies found in docs/outputs/"
+        } else {
+            Write-Host "  -> PASS: All output documents in docs/outputs/ comply 100% with standards." -ForegroundColor Green
+            Add-Result "Output Documents Standards (AM/BRD/NDA)" $true "All output files passed 100%"
+        }
+    } else {
+        Write-Host "  -> WARN: scripts/audit_outputs.py not found" -ForegroundColor Yellow
+        Add-Result "Output Documents Standards (AM/BRD/NDA)" $false "Script missing"
+    }
+} catch {
+    Write-Host "  -> ERROR: $_" -ForegroundColor Red
+    Add-Result "Output Documents Standards (AM/BRD/NDA)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------

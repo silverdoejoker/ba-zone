@@ -70,6 +70,7 @@ The workspace includes automated quality auditor scripts under `scripts/` to enf
 | `scripts/audit_uc.py` | Karl Wiegers / IIBA 16-Field Template Integrity | `use-case-writer-skill` |
 | `scripts/audit_us.py` | INVEST Principles & 3-Scenario Gherkin Syntax | `user-story-writer-skill` |
 | `scripts/audit_uat.py` | 8-Phase Protocol, Test Matrix, & Hardware Registry | `web-app-uat-skill` |
+| `scripts/audit_outputs.py` | Real Output Documents Quality, AM, NDA & Links | `docs/outputs/` Living Specifications |
 
 ### Running the Master Audit Suite:
 ```powershell
@@ -78,6 +79,31 @@ The workspace includes automated quality auditor scripts under `scripts/` to enf
 
 ---
 
+## Mandatory Post-Generation Auto-Audit Hook (Quy trình Tự Động Audit Sau Khi Tạo Tài Liệu)
+Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào trong `docs/outputs/`:
+1. **Auto-Run Audit**: Agent **BẮT BUỘC** tự động chạy kiểm định chất lượng (thông qua `scripts/audit_outputs.py`).
+2. **5 Tiêu chí kiểm định tự động**:
+   - **Cấu trúc & Template**: Đầy đủ Document Control metadata, Mục tiêu SMART, Scope in/out, Core Functional Modules, Ma trận Fit-Gap.
+   - **Thuật ngữ chuẩn NVG**: Bắt buộc chuẩn hóa Ma trận phân quyền / thẩm quyền thành **"AM" (Authority Matrix)**.
+   - **Enterprise NDA Sanitization**: Không rò rỉ PII nhân sự, credential bí mật hoặc định danh hợp đồng bảo mật.
+   - **Mermaid Diagrams**: Toàn bộ sơ đồ luồng, kiến trúc, sequence diagrams phải hợp lệ cú pháp 100%.
+   - **Cross-Links Integrity**: Mọi liên kết chéo nội bộ (`[link](...)`) phải trỏ chính xác đến các file tồn tại thực tế.
+3. **Self-Healing Loop**: Nếu phát hiện cảnh báo hoặc lỗi, Agent tự động sửa lỗi ngay lập tức trước khi bàn giao.
+4. **Audit Status Report**: Luôn đính kèm trạng thái nghiệm thu chất lượng (Audit Status: PASS) khi phản hồi người dùng.
+
+---
+
+## Enterprise Domain & Terminology Conventions (Quy chuẩn thuật ngữ nghiệp vụ NVG)
+- **Ma trận Phân quyền & Thẩm quyền (Authority Matrix)**: 
+  - Tại NVG (NovaGroup / Nova Service / ITC), Ma trận phân quyền / thẩm quyền phê duyệt được gọi tắt chính thức là **'AM'** (Authority Matrix / Approval Matrix).
+  - Trong mọi tài liệu đặc tả (BRD, URD, PRD, SRS, Use Case, UAT):
+    - Đổi/chuẩn hóa các đề mục liên quan từ *RBAC* hoặc *Ma trận phân quyền* thành **"Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)"** hoặc **"Ma trận AM"**.
+    - Khi trao đổi với Stakeholders (PMO Ms. Tú, BA Ms. Khánh, Đào tạo, BOM): Luôn sử dụng thuật ngữ **"Ma trận AM"** hoặc **"AM"**.
+
+---
+
 ## Agent Usage & Rules
 - All skills in `.agents/skills/` are automatically discovered by Antigravity AI Agent for project tasks.
 - Keep `SKILL.md` instructions and audit scripts synchronized whenever adding or modifying skill workflows.
+- Strictly adhere to NVG Terminology Conventions (AM for Authority Matrix) across all generated specifications and discussions.
+- Strictly execute the Mandatory Post-Generation Auto-Audit Hook on every document output.
