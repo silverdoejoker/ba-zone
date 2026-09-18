@@ -98,7 +98,7 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
   - Tại NVG (NovaGroup / Nova Service / ITC), Ma trận phân quyền / thẩm quyền phê duyệt được gọi tắt chính thức là **'AM'** (Authority Matrix / Approval Matrix).
   - Trong mọi tài liệu đặc tả (BRD, URD, PRD, SRS, Use Case, UAT):
     - Đổi/chuẩn hóa các đề mục liên quan từ *RBAC* hoặc *Ma trận phân quyền* thành **"Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)"** hoặc **"Ma trận AM"**.
-    - Khi trao đổi với Stakeholders (PMO Ms. Tú, BA Ms. Khánh, Đào tạo, BOM): Luôn sử dụng thuật ngữ **"Ma trận AM"** hoặc **"AM"**.
+    - Khi trao đổi với Stakeholders (PMO Ms. Tú, BA Ms. Khanh - Nguyễn Thụy Mai Khanh, Đào tạo, BOM): Luôn sử dụng thuật ngữ **"Ma trận AM"** hoặc **"AM"**.
 
 ---
 

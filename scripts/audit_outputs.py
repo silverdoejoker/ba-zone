@@ -94,6 +94,12 @@ def check_nda_sanitization(content, res):
     else:
         res.add_pass("Stakeholder persona & title integrity verified.")
 
+    # Check stakeholder naming rule: Ms. Khanh (BA PM QLCH) - ensure not misspelled as 'Khánh' or 'Nguyễn Thúy Mai'
+    if re.search(r"\bms\.\s*khánh\b|\bchị\s+khánh\b|\bnguyễn\s+thúy\s+mai\b", content, re.IGNORECASE):
+        res.add_error("Stakeholder naming violation: PIC PM QLCH is Ms. Khanh (Nguyễn Thụy Mai Khanh), not 'Khánh' or 'Nguyễn Thúy Mai'.")
+    else:
+        res.add_pass("Stakeholder PIC Ms. Khanh verified.")
+
 def audit_brd(content, filepath, res):
     """Specific audit for Business Requirements Documents."""
     content_lower = content.lower()
