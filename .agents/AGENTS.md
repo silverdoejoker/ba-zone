@@ -39,6 +39,16 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
   - Ánh xạ tự động: Tên tập đoàn ➔ MegaCorp / RetailCorp, Vendor ➔ TechPartner, Mã định danh hợp đồng ➔ REF-XXX, URLs/IPs nội bộ ➔ example.com.
   - Cờ điều khiển: `official_export=true` chỉ bật khi xuất bản bàn giao chính thức cho khách hàng.
 
+### 6. `kpi-goal-writer-skill`
+- **Location:** `.agents/skills/kpi-goal-writer-skill/`
+- **Description:** Generate KPI / Goal specifications for HR Performance Review systems (probation, quarterly, annual) following the standardized "Tạo Hiệu quả công việc Goal" form template used at NVG/ITC.
+- **Core Capability:** 
+  - **BA Controls Principle**: Mọi mốc KPI phải nằm 100% trong tầm kiểm soát của BA, lọc bỏ mọi dependency vào Dev/Ops/Deployment.
+  - **Risk-Aware Scoping**: Tự động phân loại quy mô DA (Small/Medium vs Large/Complex) để đề xuất scope phù hợp (UAT Package vs Ma trận AM & Prototype).
+  - **Parallel Project Weight Allocation**: Phân bổ trọng số hợp lý cho DA song song, chừa dự phòng cho DA ad-hoc phát sinh.
+  - **13-Field HR Form Template**: Output copy-paste-ready trực tiếp vào hệ thống đánh giá Goal/KPI của HR.
+  - **10-Point Quality Checklist**: Audit tự động sau khi tạo KPI (BA Controls, timeline conflicts, weight sum = 100%).
+
 ---
 
 ## Strict Repository Policy: Documentation Only (Zero Prototype/Build Leakage)
