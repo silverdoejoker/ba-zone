@@ -224,3 +224,54 @@ After generating all KPI forms, validate against this checklist:
 - **Tài liệu Đặc tả Chi tiết** → **SRS** (Software Requirements Specification).
 - **Hồ sơ Kiểm thử Nghiệm thu** → **UAT Package** (Test Cases Matrix + User Guide).
 - Refer to stakeholders by role title, not personal name, unless `official_export=true`.
+
+---
+
+## HR System Approval Workflow (Luồng Phê duyệt trên Hệ thống)
+
+After filling in all 13 fields and saving the Goal form, the HR system requires an **approval workflow** before the KPI is officially active.
+
+### Workflow Steps
+
+```
+┌──────────────┐     ┌──────────────────────┐     ┌──────────────┐
+│  Nhân viên   │────▶│  Gửi QLTT phê duyệt  │────▶│    QLTT      │
+│  (Tạo Goal)  │     │  (Submit to Manager)  │     │  (Phê duyệt) │
+└──────────────┘     └──────────────────────┘     └──────────────┘
+```
+
+| Step | Actor | Action | Ghi chú |
+|---|---|---|---|
+| 1 | **Nhân viên** | Điền đầy đủ 13 trường → Nhấn **"Lưu"** | Lưu nháp, chưa gửi duyệt |
+| 2 | **Nhân viên** | Nhấn **"Gửi QLTT phê duyệt"** | Popup xác nhận: *"Bạn sắp gửi biểu mẫu này cho người tiếp theo được chỉ định trong luồng công việc"* |
+| 3 | **Nhân viên** | Điền **Nhận xét** (optional) → Nhấn **"Gửi QLTT phê duyệt"** | Biểu mẫu chuyển tiếp đến QLTT (Quản lý trực tiếp) |
+| 4 | **QLTT** | Review → **Phê duyệt** hoặc **Từ chối** (trả lại kèm nhận xét) | Nếu từ chối: Nhân viên chỉnh sửa và gửi lại |
+
+### Suggested "Nhận xét" Template (Copy-paste ready)
+
+When submitting for approval, agent SHOULD generate a concise comment summarizing the KPI scope:
+
+```
+Kính gửi Anh/Chị,
+
+Em gửi KPI thử việc gồm [X] mục tiêu cho [X] dự án song song:
+1. [Tên DA 1] (Trọng số [XX]%): [Tóm tắt deliverables chính]
+2. [Tên DA 2] (Trọng số [XX]%): [Tóm tắt deliverables chính]
+[3. Nhiệm vụ ad-hoc / hỗ trợ phát sinh (Trọng số [XX]%)]
+
+Tổng trọng số: 100%. Kính nhờ Anh/Chị review và phê duyệt.
+Trân trọng.
+```
+
+### Key Terms in HR System UI
+
+| UI Label (Vietnamese) | Meaning | Context |
+|---|---|---|
+| **QLTT** | Quản lý trực tiếp (Direct Manager) | Người phê duyệt KPI đầu tiên |
+| **Gửi QLTT phê duyệt** | Submit to Direct Manager for approval | Nút gửi form lên cấp trên |
+| **Nhận xét** | Comment / Remark | Ghi chú khi gửi hoặc phê duyệt/từ chối |
+| **Lưu** | Save (Draft) | Lưu nháp, chưa gửi |
+| **Hủy** | Cancel | Hủy thao tác hiện tại |
+| **Đang thực hiện** | In Progress | Trạng thái mặc định khi tạo mới |
+| **Điểm đánh giá** | Evaluation Score | Điểm do QLTT chấm sau kỳ đánh giá |
+
