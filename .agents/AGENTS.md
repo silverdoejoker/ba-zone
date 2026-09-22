@@ -10,7 +10,7 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
 ### 1. `doc-template-learner-skill`
 - **Location:** `.agents/skills/doc-template-learner-skill/`
 - **Description:** Reverse-engineers and extracts formatting rules, structure, table templates, and writing tone from reference documents (BRD, SRS, PRD, FSD).
-- **Core Capability:** Learns document structural blueprints and generates structurally identical documents populated with new project content.
+- **Core Capability:** Learns document structural blueprints and generates structurally identical documents populated with new project content. Includes the official **NVG Standard BRD Template (`TEMPLATE-BRD-NVG-STD-2026`)** in `docs/templates/template_brd_standard.md` (6-section architecture: Request overview, Feature priority, 13-case calculation engine, concise use cases, and raw/rollup export schemas).
 
 ### 2. `use-case-writer-skill`
 - **Location:** `.agents/skills/use-case-writer-skill/`
