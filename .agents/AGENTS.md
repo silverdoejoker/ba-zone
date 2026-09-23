@@ -49,6 +49,15 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
   - **13-Field HR Form Template**: Output copy-paste-ready trực tiếp vào hệ thống đánh giá Goal/KPI của HR.
   - **10-Point Quality Checklist**: Audit tự động sau khi tạo KPI (BA Controls, timeline conflicts, weight sum = 100%).
 
+### 7. `digital-transformation-roadmap-skill`
+- **Location:** `.agents/skills/digital-transformation-roadmap-skill/`
+- **Description:** Enterprise Digital Transformation Strategy & Architecture RAG Knowledge Base (2025–2030).
+- **Core Capability:** 
+  - Đóng gói Lộ trình 5 Wave CĐS (2024-2030+), Phân hoạch 5 Tầng Kiến trúc (EDP Lakehouse, ECT, ESB).
+  - Mô hình Vận hành IT-as-a-Business, 6 Task-Force chuyên trách & Chu trình phối hợp 6 bước với Business.
+  - Nền tảng One Nova (Employee Journey 12 bước, Cascade KPI 100%, Ma trận AM).
+  - Quy trình 5 bước kiểm tra đối chiếu tính tương thích kiến trúc khi nhận dự án mới.
+
 ---
 
 ## Strict Repository Policy: Documentation Only (Zero Prototype/Build Leakage)
