@@ -100,6 +100,73 @@ def check_nda_sanitization(content, res):
     else:
         res.add_pass("Stakeholder PIC Ms. Khanh verified.")
 
+def check_dev_architecture_spine(content, filepath, res):
+    """
+    Verifies compliance with Dev Architecture Spine Baseline 2026:
+    - Zero Local Auth (SSO Gateway Policy)
+    - Authority Matrix (AM) & Security L7 Data Scope separation
+    - Table Prefix {prefix}_ (e.g. gms_* for GMS documents)
+    - Strict Soft-Delete Invariant (Zero Hard-Delete)
+    - Async Processing for Heavy Batch Operations
+    """
+    content_lower = content.lower()
+    
+    # 1. Zero Local Auth: Check for local authentication / password management for internal users
+    forbidden_auth = [
+        r"(tạo|đăng ký)\s+tài khoản\s+(nội bộ|nhân viên)",
+        r"(quên|đặt lại|reset)\s+mật khẩu\s+(nội bộ|nhân viên)",
+        r"form\s+đăng nhập\s+(nội bộ|nhân viên|admin)"
+    ]
+    for pat in forbidden_auth:
+        if re.search(pat, content_lower):
+            res.add_warning("Phát hiện mô tả chức năng auth nội bộ cục bộ. Dev Spine quy định Zero Local Auth: 100% người dùng nội bộ đi qua application-gateway + SSO MS Entra.")
+
+    # 2. Authority Matrix (AM) & Data Scope
+    has_am = any(k in content_lower for k in ["authority matrix", "ma trận am", "ma trận phân quyền", "phân quyền & thẩm quyền"])
+    if has_am:
+        # Check if terminology uses AM
+        if "rbac" in content_lower and "am" not in content_lower and "authority matrix" not in content_lower:
+            res.add_warning("Thuật ngữ phân quyền nên chuẩn hóa thành 'Ma trận Phân quyền & Thẩm quyền (AM)' theo quy ước NVG.")
+        
+        # Check if Data Scope is addressed when AM table/section is present
+        has_data_scope = any(k in content_lower for k in ["data scope", "phạm vi dữ liệu", "security l7", "phạm vi cho phép"])
+        if has_data_scope:
+            res.add_pass("Ma trận AM phân tách 2 tầng (Functional Permission & Security L7 Data Scope) hợp lệ.")
+        else:
+            res.add_warning("Ma trận AM nên bổ sung cột 'Phạm vi dữ liệu (Data Scope)' theo chuẩn Security L7 Dev Architecture Spine.")
+
+    # 3. Database Schema Prefix {prefix}_
+    is_gms = "gms" in filepath.lower() or "gms" in content_lower
+    if is_gms:
+        has_db_schema = any(k in content_lower for k in ["bảng csdl", "database schema", "thực thể dữ liệu", "entity / model"])
+        if has_db_schema:
+            gms_tables = re.findall(r"`(gms_[a-z0-9_]+)`", content)
+            if gms_tables:
+                res.add_pass(f"Quy chuẩn tiền tố CSDL chuẩn hóa: tìm thấy {len(gms_tables)} bảng mang prefix 'gms_*'.")
+            else:
+                res.add_warning("Tài liệu có đặc tả bảng CSDL nhưng chưa tìm thấy tiền tố 'gms_*' theo chuẩn CSDL NVG.")
+
+    # 4. Strict Soft-Delete Invariant (Zero Hard-Delete)
+    hard_delete_patterns = [
+        r"xóa\s+vĩnh\s+viễn",
+        r"hard\s*-?\s*delete",
+        r"xóa\s+hoàn\s+toàn\s+khỏi\s+(csdl|database|hệ thống)"
+    ]
+    for pat in hard_delete_patterns:
+        if re.search(pat, content_lower):
+            res.add_error("Vi phạm nguyên tắc Xóa mềm (Strict Soft-Delete Invariant): Không được phép hard-delete dữ liệu trong đặc tả BA.")
+            break
+    
+    if any(k in content_lower for k in ["soft-delete", "xóa mềm", "deletedat", "deleted_at"]):
+        res.add_pass("Tuân thủ nguyên tắc Xóa mềm (Strict Soft-delete 100%).")
+
+    # 5. Async Processing for Heavy Batch Operations
+    has_heavy_batch = any(k in content_lower for k in ["import excel", "nhập excel", "tính tiền thuê", "kết xuất file", "xuất pdf"])
+    if has_heavy_batch:
+        has_async = any(k in content_lower for k in ["bất đồng bộ", "async", "queue", "rabbitmq", "nats", "chạy nền", "tiến trình nền", "background"])
+        if has_async:
+            res.add_pass("Đặc tả tác vụ khối lượng lớn (Batch Job) tuân thủ luồng xử lý bất đồng bộ (Async Queue).")
+
 def audit_brd(content, filepath, res):
     """Specific audit for Business Requirements Documents."""
     content_lower = content.lower()
@@ -166,6 +233,7 @@ def audit_document(filepath):
     check_mermaid_syntax(content, res)
     check_cross_links(content, filepath, res)
     check_nda_sanitization(content, res)
+    check_dev_architecture_spine(content, filepath, res)
 
     # Document type specific checks
     lower_fn = filename.lower()

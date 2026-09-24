@@ -97,7 +97,7 @@ The workspace includes automated quality auditor scripts under `scripts/` to enf
 | `scripts/audit_uc.py` | Karl Wiegers / IIBA 16-Field Template Integrity | `use-case-writer-skill` |
 | `scripts/audit_us.py` | INVEST Principles & 3-Scenario Gherkin Syntax | `user-story-writer-skill` |
 | `scripts/audit_uat.py` | 8-Phase Protocol, Test Matrix, & Hardware Registry | `web-app-uat-skill` |
-| `scripts/audit_outputs.py` | Real Output Documents Quality, AM, NDA & Links | `docs/outputs/` Living Specifications |
+| `scripts/audit_outputs.py` | Real Output Documents Quality, AM, Dev Architecture Spine, NDA & Links | `docs/outputs/` Living Specifications |
 
 ### Running the Master Audit Suite:
 ```powershell
@@ -109,9 +109,10 @@ The workspace includes automated quality auditor scripts under `scripts/` to enf
 ## Mandatory Post-Generation Auto-Audit Hook (Quy trình Tự Động Audit Sau Khi Tạo Tài Liệu)
 Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào trong `docs/outputs/`:
 1. **Auto-Run Audit**: Agent **BẮT BUỘC** tự động chạy kiểm định chất lượng (thông qua `scripts/audit_outputs.py`).
-2. **5 Tiêu chí kiểm định tự động**:
+2. **6 Tiêu chí kiểm định tự động**:
    - **Cấu trúc & Template**: Đầy đủ Document Control metadata, Mục tiêu SMART, Scope in/out, Core Functional Modules, Ma trận Fit-Gap.
    - **Thuật ngữ chuẩn NVG**: Bắt buộc chuẩn hóa Ma trận phân quyền / thẩm quyền thành **"AM" (Authority Matrix)**.
+   - **Dev Architecture Spine 2026**: Zero local auth, Ma trận AM 2 tầng kèm Data Scope, CSDL prefix `{prefix}_`, Strict Soft-delete 100%, Async Queue cho batch jobs.
    - **Enterprise NDA Sanitization**: Không rò rỉ PII nhân sự, credential bí mật hoặc định danh hợp đồng bảo mật.
    - **Mermaid Diagrams**: Toàn bộ sơ đồ luồng, kiến trúc, sequence diagrams phải hợp lệ cú pháp 100%.
    - **Cross-Links Integrity**: Mọi liên kết chéo nội bộ (`[link](...)`) phải trỏ chính xác đến các file tồn tại thực tế.

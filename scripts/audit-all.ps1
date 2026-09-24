@@ -203,10 +203,10 @@ try {
         if ($LASTEXITCODE -ne 0) {
             Write-Host "  -> FAIL: Output documents failed standard compliance!" -ForegroundColor Red
             Write-Host $output
-            Add-Result "Output Documents Standards (AM/BRD/NDA)" $false "Discrepancies found in docs/outputs/"
+            Add-Result "Output Docs (AM/BRD/NDA/Dev Spine)" $false "Discrepancies found in docs/outputs/"
         } else {
             Write-Host "  -> PASS: All output documents in docs/outputs/ comply 100% with standards." -ForegroundColor Green
-            Add-Result "Output Documents Standards (AM/BRD/NDA)" $true "All output files passed 100%"
+            Add-Result "Output Docs (AM/BRD/NDA/Dev Spine)" $true "All output files passed 100%"
         }
     } else {
         Write-Host "  -> WARN: scripts/audit_outputs.py not found" -ForegroundColor Yellow
