@@ -58,6 +58,14 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
   - Nền tảng One Nova (Employee Journey 12 bước, Cascade KPI 100%, Ma trận AM).
   - Quy trình 5 bước kiểm tra đối chiếu tính tương thích kiến trúc khi nhận dự án mới.
 
+### 8. `dev-architecture-spine-skill`
+- **Location:** `.agents/skills/dev-architecture-spine-skill/`
+- **Description:** Technical Baseline & Architecture Spine 2026 for IT BA specification authoring.
+- **Core Capability:** 
+  - 7 Trụ cột kiến trúc chuẩn hóa (Application Gateway SSO, Ma trận AM 2 tầng, Table Prefix `gms_*`, Strict Soft-delete 100%, Immutability, API Envelope, Async Queue RabbitMQ/NATS).
+  - Checklist 7 Điểm đối chiếu tương thích kỹ thuật giữa BA Specs và Dev Architecture.
+  - Phân tách ranh giới rõ ràng giữa Functional RBAC và Security L7 Data Scope.
+
 ---
 
 ## Strict Repository Policy: Documentation Only (Zero Prototype/Build Leakage)
@@ -122,7 +130,13 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
   - Ms. Trang (Giám đốc Bộ phận Quản lý CĐS): `itc.gdbp.4@novagroup.vn`
   - Ms. Tú (Chuyên gia Quản lý Dự án - PMO): `itc.cg.3@novagroup.vn` | SĐT: `0397479999`
   - Ms. Khanh (Chuyên viên Cao cấp BA PM QLCH): `itc.cvcc.3@novagroup.vn` | SĐT: `0904884874`
-  - Minh (Trần Quang Anh - Senior IT BA): `itc.cvcc.55@novagroup.vn`
+- **Quy chuẩn Kiến trúc Kỹ thuật (Dev Architecture Baseline 2026)**:
+  - Tuân thủ toàn diện các quy ước tại `.agents/rules/dev_architecture_conventions.md` và `docs/guidelines/ARCHITECTURE-SPINE.md`.
+  - Zero Local Auth (SSO qua Application Gateway).
+  - Tách bạch Ma trận AM (Functional Permission) và Security L7 Data Scope (Dự án/Phân khu).
+  - Bảng CSDL có prefix `{prefix}_` (ví dụ `gms_*`).
+  - 100% Xóa mềm (Strict Soft-delete).
+  - Tác vụ nặng (Excel import, tính tiền hàng loạt, xuất PDF lớn) phải quy định luồng xử lý bất đồng bộ (Async Queue RabbitMQ/NATS).
 
 ---
 
@@ -130,4 +144,5 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
 - All skills in `.agents/skills/` are automatically discovered by Antigravity AI Agent for project tasks.
 - Keep `SKILL.md` instructions and audit scripts synchronized whenever adding or modifying skill workflows.
 - Strictly adhere to NVG Terminology Conventions (AM for Authority Matrix) across all generated specifications and discussions.
+- Strictly enforce the Dev Architecture Baseline (`dev-architecture-spine-skill`) on all BRD, SRS, Use Case, Data Dictionary, and UAT artifacts.
 - Strictly execute the Mandatory Post-Generation Auto-Audit Hook on every document output.
