@@ -41,7 +41,7 @@ Hệ thống tài liệu chuẩn hóa tại Khối CNTT NovaGroup (NVG-ITC) bao 
   2. *Thông tin chung:* Phạm vi tài liệu, Mục đích tài liệu, Khái niệm & thuật ngữ (AM, GFA/NLA, Turnover Rent), Tài liệu tham khảo.
   3. *Tổng quan ứng dụng:* Mục đích (SMART), Phạm vi (In/Out Scope), Quyền hạn sử dụng & Ma trận AM (Security L7 Data Scope).
   4. *Mô tả yêu cầu chức năng:* Danh sách yêu cầu chức năng, đặc tả Core Use Cases chi tiết.
-  5. *Giải pháp hệ thống:* Kiến trúc Dev Spine 2026, CSDL `gms_*`, Calculation Engine & Ma trận 13 Test Cases, Sequence Diagram, Data Export Schema.
+  5. *Giải pháp hệ thống:* Kiến trúc Dev Spine 2026, CSDL `gms_*`, Calculation Engine & Ma trận Kịch bản Kiểm thử linh hoạt (Flexible Test Scenarios Matrix theo quy mô dự án), Sequence Diagram, Data Export Schema.
 
 ### 2. NVG Business Application Requirement Template (`TEMPLATE-NVG-ITD-SOP01-PTUD-2025`)
 * **Mã số mẫu:** `NVG-ITD-SOP01.F01`
@@ -54,7 +54,7 @@ Hệ thống tài liệu chuẩn hóa tại Khối CNTT NovaGroup (NVG-ITC) bao 
 ### 3. NVG Standard BRD Template (`TEMPLATE-BRD-NVG-STD-2026`)
 * **Mã số mẫu:** `TEMPLATE-BRD-NVG-STD-2026`
 * **File template:** [`docs/templates/template_brd_standard.md`](file:///d:/repo/ba-zone/docs/templates/template_brd_standard.md)
-* **Cấu trúc 6 phần:** Header, Yêu cầu bối cảnh, Phân rã tính năng & mốc bàn giao, Engine tính toán & ma trận 13 cases, 6-field concise use cases, Data export schema, Quản trị ngoại lệ AM.
+* **Cấu trúc 6 phần:** Header, Yêu cầu bối cảnh, Phân rã tính năng & mốc bàn giao, Engine tính toán & ma trận kịch bản kiểm thử linh hoạt, 6-field concise use cases, Data export schema, Quản trị ngoại lệ AM.
 
 ---
 

@@ -11,9 +11,12 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
 - **Location:** `.agents/skills/doc-template-learner-skill/`
 - **Description:** Reverse-engineers and extracts formatting rules, structure, table templates, and writing tone from reference documents (BRD, SRS, PRD, FSD).
 - **Core Capability:** Learns document structural blueprints and generates structurally identical documents populated with new project content. Includes the official NVG template library:
-  - **NVG Solution Architecture Design Template (`NVG-ITD-SOP14.F01`)** in `docs/templates/template_thiet_ke_giai_phap_sop14.md` (5-section architecture: Document change history, General info & Glossary, Application overview & AM scope, Functional requirements & Core Use Cases, System solution architecture with calculation engine & 13 edge cases).
+  - **NVG Solution Architecture Design Template (`NVG-ITD-SOP14.F01`)** in `docs/templates/template_thiet_ke_giai_phap_sop14.md` (5-section architecture: Document change history, General info & Glossary, Application overview & AM scope, Functional requirements & Core Use Cases, System solution architecture with calculation engine & dynamic project-specific test scenarios).
   - **NVG Application Requirement Template (`NVG-ITD-SOP01.F01`)** in `docs/templates/template_yeu_cau_ptud_sop01.md` (3-part official form: General info, Requirement description with workflow tables & SSO, 3-tier submission & 2-tier approval).
-  - **NVG Standard BRD Template (`TEMPLATE-BRD-NVG-STD-2026`)** in `docs/templates/template_brd_standard.md` (6-section architecture: Request overview, Feature priority, 13-case calculation engine, concise use cases, and raw/rollup export schemas).
+  - **NVG Standard BRD Template (`TEMPLATE-BRD-NVG-STD-2026`)** in `docs/templates/template_brd_standard.md` (6-section architecture: Request overview, Feature priority, calculation engine with flexible test scenarios matrix, concise use cases, and raw/rollup export schemas).
+
+> **Nguyên tắc Ma trận Kịch bản Kiểm thử (Flexible Test Scenarios Policy):**  
+> Tuyệt đối KHÔNG gán cứng số lượng Test Cases cố định (như 13 cases). Số lượng và độ phủ của Ma trận Kịch bản Kiểm thử (Test Scenarios Matrix) phải được xác định linh hoạt căn cứ theo quy mô, bản chất nghiệp vụ và rủi ro thực tế của từng dự án cụ thể.
 
 ### 2. `use-case-writer-skill`
 - **Location:** `.agents/skills/use-case-writer-skill/`
