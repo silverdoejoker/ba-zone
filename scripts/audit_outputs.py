@@ -218,6 +218,25 @@ def audit_action_plan(content, filepath, res):
         res.add_warning("Action Plan missing phases / timeline.")
     res.add_pass("Action Plan core structure verified.")
 
+def audit_sop14(content, filepath, res):
+    """Specific audit for NVG-ITD-SOP14.F01 Solution Architecture & Design Documents."""
+    content_lower = content.lower()
+    sop14_sections = [
+        ("bảng ghi nhận thay đổi tài liệu", "Mục 1: Bảng ghi nhận thay đổi tài liệu"),
+        ("thông tin chung", "Mục 2: Thông tin chung"),
+        ("tổng quan ứng dụng", "Mục 3: Tổng quan ứng dụng"),
+        ("mô tả yêu cầu chức năng", "Mục 4: Mô tả yêu cầu chức năng"),
+        ("giải pháp hệ thống", "Mục 5: Giải pháp hệ thống"),
+    ]
+    missing_sections = []
+    for keyword, name in sop14_sections:
+        if keyword not in content_lower:
+            missing_sections.append(name)
+    if missing_sections:
+        res.add_warning(f"SOP14 document missing sections: {', '.join(missing_sections)}")
+    else:
+        res.add_pass("SOP14 5-section architecture (NVG-ITD-SOP14.F01) fully verified.")
+
 def audit_document(filepath):
     filename = os.path.basename(filepath)
     res = AuditResult(filename)
@@ -237,6 +256,9 @@ def audit_document(filepath):
 
     # Document type specific checks
     lower_fn = filename.lower()
+    content_lower = content.lower()
+    if "sop14" in lower_fn or "sop14" in content_lower or "tài liệu thiết kế giải pháp" in content_lower:
+        audit_sop14(content, filepath, res)
     if "brd" in lower_fn:
         audit_brd(content, filepath, res)
     elif "action_plan" in lower_fn:
