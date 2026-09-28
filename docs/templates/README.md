@@ -9,6 +9,9 @@
 
 | Tên File | Chuẩn Áp Dụng | Mô Tả & Mục Đích Sử Dụng | Skill Tương Ứng |
 |---|---|---|---|
+| [`template_brd_standard.md`](file:///d:/repo/ba-zone/docs/templates/template_brd_standard.md) | `NVG-ITD-SOP14.F01` / BRD STD | Mẫu Đặc tả Yêu cầu Nghiệp vụ & Thiết kế Giải pháp tiêu chuẩn NVG (5 phần chính thức, Ma trận AM, tích hợp API vs DB, và ma trận test scenarios linh hoạt). | `doc-template-learner-skill` |
+| [`template_thiet_ke_giai_phap_sop14.md`](file:///d:/repo/ba-zone/docs/templates/template_thiet_ke_giai_phap_sop14.md) | `NVG-ITD-SOP14.F01` | Mẫu Thiết kế Tài liệu Giải pháp (SAD) chính thức của NVG-ITC với tiền tố CSDL chuẩn và ranh giới Security L7 Data Scope. | `doc-template-learner-skill` |
+| [`template_yeu_cau_ptud_sop01.md`](file:///d:/repo/ba-zone/docs/templates/template_yeu_cau_ptud_sop01.md) | `NVG-ITD-SOP01.F01` | Biểu mẫu Phiếu Yêu cầu Phát triển Ứng dụng chuẩn NVG (3 phần chính thức: Thông tin chung, Mô tả yêu cầu, Trình & Phê duyệt). | `doc-template-learner-skill` |
 | [`template_blueprint_schema.md`](file:///d:/repo/ba-zone/docs/templates/template_blueprint_schema.md) | Blueprint Schema | Mẫu cấu trúc YAML chuẩn để trích xuất và bóc tách bố cục từ bất kỳ tài liệu gốc nào (BRD/SRS/FSD). | `doc-template-learner-skill` |
 | [`template_use_case_16_fields.md`](file:///d:/repo/ba-zone/docs/templates/template_use_case_16_fields.md) | Karl Wiegers / IIBA BABOK | Mẫu đặc tả Use Case chuẩn mực 16 trường (Song ngữ EN / VI) với bảng luồng sự kiện chính, luồng thay thế và ngoại lệ. | `use-case-writer-skill` |
 | [`template_user_story_invest.md`](file:///d:/repo/ba-zone/docs/templates/template_user_story_invest.md) | Agile INVEST & Gherkin | Mẫu User Story chuẩn Agile tích hợp bảng tự đánh giá 6 tiêu chí INVEST và 3 kịch bản Acceptance Criteria bắt buộc. | `user-story-writer-skill` |
