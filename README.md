@@ -131,27 +131,25 @@ Repository tích hợp sẵn kịch bản kiểm thử tự động theo tiêu c
 powershell -ExecutionPolicy Bypass -File .\scripts\audit-all.ps1
 ```
 
-### Các Suite Kiểm Thử:
-1. **Suite 1: Use Case Standard & Format Integrity (`scripts/audit_uc.py`)**
-   - Kiểm tra đủ 16 trường bắt buộc (cả nhãn tiếng Anh lẫn tiếng Việt).
-   - Kiểm tra định dạng mã `UC-[MODULE]-[NN]`.
-   - Kiểm tra Normal Course đánh số thứ tự, phân định rõ Actor và System.
-   - Ngăn chặn logic rẽ nhánh `if/else` bị nhồi nhét vào luồng chính.
-   - Kiểm tra định dạng mã rẽ nhánh `AC` và ngoại lệ `EX`.
-2. **Suite 2: User Story & AC Standard Integrity (`scripts/audit_us.py`)**
-   - Kiểm tra cấu trúc 3 phần `As a... I want to... So that...`.
-   - Phát hiện và cảnh báo anti-pattern persona chung chung (*"user"*, *"người dùng"*).
-   - Kiểm tra sự hiện diện của bảng tự đánh giá INVEST.
-   - Kiểm tra cú pháp Gherkin `Given-When-Then`.
-   - Xác thực độ bao phủ đủ 3 loại kịch bản: Happy path, Edge case, Negative path.
-3. **Suite 3: Web App UAT & Live Experience Integrity (`scripts/audit_uat.py`)**
-   - Kiểm tra đủ 8 phần cấu trúc cốt lõi của biên bản nghiệm thu UAT.
-   - Kiểm tra mã định danh Test Case chuẩn `TC-[MODULE]-[NN]`.
-   - Kiểm tra độ bao phủ đầy đủ 3 loại kịch bản: Happy Path, Edge Case, Negative Path.
-   - Kiểm tra phân loại mức độ nghiêm trọng lỗi (Critical, Major, Minor, Trivial).
-   - Xác thực kiểm thử hiển thị đa màn hình (Desktop 1920x1080, Tablet 768x1024, Mobile 375x667).
-   - Kiểm tra trạng thái sạch sẽ của Javascript Console và HTTP Network.
-   - Kiểm tra danh mục phân lập ranh giới phần cứng và quyết định nghiệm thu xuất xưởng (GO / NO-GO).
+### Các Suite Kiểm Thử (5-Tier Master Auditor):
+1. **Suite 1: Repo Hygiene & Zero Leakage (`scripts/audit_hygiene.py`)**
+   - Kiểm tra `git ls-files` đảm bảo 0 prototype/build files và 0 file nhạy cảm nội bộ bị commit.
+   - Xác thực cấu hình `.gitignore` bảo vệ tuyệt đối thư mục `docs/inputs/`, `docs/outputs/`, `artifacts/`.
+2. **Suite 2: Use Case Standard & Format Integrity (`scripts/audit_uc.py`)**
+   - Kiểm tra đủ 16 trường bắt buộc (Karl Wiegers / IIBA Babok).
+   - Kiểm tra mã `UC-[MODULE]-[NN]`, Normal Course tuần tự, phân tách rõ ràng Actor và System.
+3. **Suite 3: User Story & AC Standard Integrity (`scripts/audit_us.py`)**
+   - Kiểm tra cấu trúc `As a... I want to... So that...` và bảng tự đánh giá INVEST.
+   - Kiểm tra cú pháp Gherkin `Given-When-Then` đủ 3 kịch bản: Happy path, Edge case, Negative path.
+4. **Suite 4: Web App UAT & Live Experience Integrity (`scripts/audit_uat.py`)**
+   - Kiểm tra cấu trúc 8 phần của biên bản nghiệm thu UAT TrọBill.
+   - Kiểm tra độ bao phủ Test Cases, viewport đa thiết bị và Hardware Isolation Registry (GO / NO-GO).
+5. **Suite 5: Output Quality, Anti-Overflow Format & Vietnamese Spelling (`scripts/audit_outputs.py`)**
+   - Kiểm tra toàn diện tài liệu trong `docs/outputs/` (cả `.md` và `.html`) theo [`.agents/rules/output_quality_standards.md`](file:///d:/repo/ba-zone/.agents/rules/output_quality_standards.md).
+   - Bắt buộc khóa cứng CSS chống tràn A4 (`table-layout: fixed; width: 100%;` và `@page { size: A4 portrait; margin: 12mm 10mm; }`).
+   - Kiểm soát ngân sách cột bảng: Tối đa 4 cột cho text dài, bắt buộc tách bảng theo từng phân kỳ.
+   - Rà soát từ điển lỗi chính tả BA (26+ cặp từ: `giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`...).
+   - Kiểm tra giọng văn ngoại giao doanh nghiệp, chuẩn hóa Ma trận `AM (Authority Matrix)` và Dev Architecture Spine Baseline 2026.
 
 ---
 

@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.5.0] - 2026-09-29
+
+### Added
+- **Output Quality & Anti-Overflow Standards Rule ([`.agents/rules/output_quality_standards.md`](file:///d:/repo/ba-zone/.agents/rules/output_quality_standards.md))**:
+  - Established 3 quality pillars: Structure Hierarchy, Format Anti-Overflow, and Vietnamese BA Spelling.
+  - Table Column Budget Policy: Enforces $\le 4$ columns for text-heavy tables; mandates phase-based sub-table split.
+  - HTML Anti-Overflow Protection: Mandatory `table-layout: fixed; width: 100%; word-break: break-word;` and `@page { size: A4 portrait; margin: 12mm 10mm; }`.
+  - Vietnamese BA Typo Blacklist: Curated dictionary of 26+ common enterprise BA typos (`giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`, `lưu trữ`...).
+  - Diplomatic Corporate Tone: Standardizes collective naming ("Phòng TRC phối hợp...") and filters out individual lecturer naming in issues/clarifications.
+- **Enhanced Output Auditor ([`scripts/audit_outputs.py`](file:///d:/repo/ba-zone/scripts/audit_outputs.py))**:
+  - Expanded scanner to audit both `.md` and `.html` deliverables in `docs/outputs/`.
+  - Added `check_vietnamese_spelling_and_typos()` for automated spelling and tone verification.
+  - Added `check_table_formatting_and_overflow()` validating column balance in MD and CSS anti-overflow rules in HTML.
+  - Added `check_markdown_syntax_integrity()` detecting unclosed `**` bold tags and broken links.
+  - Added `check_heading_hierarchy()` enforcing sequential H1 -> H2 -> H3 headings without level skipping.
+- **Guideline Document ([`docs/guidelines/document_anti_overflow_and_spelling_guide.md`](file:///d:/repo/ba-zone/docs/guidelines/document_anti_overflow_and_spelling_guide.md))**:
+  - Comprehensive guide covering lesson learned, 4-column budget, print CSS snippets, and corporate communication rules.
+- **Updated Workspace Auto-Audit Hook ([`.agents/AGENTS.md`](file:///d:/repo/ba-zone/.agents/AGENTS.md))**:
+  - Expanded mandatory post-generation auto-audit hook to 8 comprehensive quality criteria.
+
+---
+
 ## [Unreleased] - 2026-09-17
 
 ### Added
