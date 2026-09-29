@@ -144,9 +144,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit-all.ps1
 4. **Suite 4: Web App UAT & Live Experience Integrity (`scripts/audit_uat.py`)**
    - Kiểm tra cấu trúc 8 phần của biên bản nghiệm thu UAT TrọBill.
    - Kiểm tra độ bao phủ Test Cases, viewport đa thiết bị và Hardware Isolation Registry (GO / NO-GO).
-5. **Suite 5: Output Quality, Anti-Overflow Format & Vietnamese Spelling (`scripts/audit_outputs.py`)**
+5. **Suite 5: Output Quality, Anti-Overflow, Word-Friendly & Vietnamese Spelling (`scripts/audit_outputs.py`)**
    - Kiểm tra toàn diện tài liệu trong `docs/outputs/` (cả `.md` và `.html`) theo [`.agents/rules/output_quality_standards.md`](file:///d:/repo/ba-zone/.agents/rules/output_quality_standards.md).
    - Bắt buộc khóa cứng CSS chống tràn A4 (`table-layout: fixed; width: 100%;` và `@page { size: A4 portrait; margin: 12mm 10mm; }`).
+   - Chuẩn hóa Text-First & Word-Friendly: Cấm CSS Grid, card decks trôi nổi và badge viên thuốc bo tròn lớn; bắt buộc dùng `<table>` chuẩn cho Metadata/KPI metrics; luôn đính kèm Text Fallback Table dưới sơ đồ Mermaid để chuyển PDF $\rightarrow$ DOCX không bị vỡ layout hoặc phải sửa manual.
    - Kiểm soát ngân sách cột bảng: Tối đa 4 cột cho text dài, bắt buộc tách bảng theo từng phân kỳ.
    - Rà soát từ điển lỗi chính tả BA (26+ cặp từ: `giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`...).
    - Kiểm tra giọng văn ngoại giao doanh nghiệp, chuẩn hóa Ma trận `AM (Authority Matrix)` và Dev Architecture Spine Baseline 2026.

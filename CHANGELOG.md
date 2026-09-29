@@ -4,6 +4,21 @@ All notable changes to the **BA Zone (Requirements & Documentation Toolkit)** pr
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-09-29
+
+### Added
+- **Text-First & Word-Friendly Standard (Anti-Graphics Degradation)**:
+  - Enshrined **Trụ Cột IV** into [`.agents/rules/output_quality_standards.md`](file:///d:/repo/ba-zone/.agents/rules/output_quality_standards.md) & [`.agents/AGENTS.md`](file:///d:/repo/ba-zone/.agents/AGENTS.md): "Text & Table Native thay thế Graphics Phù phiếm".
+  - Prohibits CSS Grid (`display: grid`) for main document layouts; mandates native HTML `<table>` with `table-layout: fixed; width: 100%`.
+  - Replaces fragile rounded pill badges (`border-radius: 20px`) with text-first bracketed labels (`[NVG-ITD-SOP14.F01 · DRAFT v0.2]`, `[SẴN SÀNG PILOT — 9 TÍNH NĂNG]`, `[TÍCH HỢP SAU PILOT — 4 TÍNH NĂNG]`).
+  - Mandates **Text Fallback Summary Tables** immediately beneath all Mermaid diagrams so PDF $\rightarrow$ DOCX conversion retains 100% technical specifications even if Word strips or distorts SVG graphics.
+  - Added Section 6 to [`docs/guidelines/document_anti_overflow_and_spelling_guide.md`](file:///d:/repo/ba-zone/docs/guidelines/document_anti_overflow_and_spelling_guide.md) detailing root causes and best practices.
+- **Enhanced Output Auditor ([`scripts/audit_outputs.py`](file:///d:/repo/ba-zone/scripts/audit_outputs.py))**:
+  - Added `check_word_friendly_graphics()` to automatically scan HTML deliverables for CSS Grid anti-patterns, large border-radius badges, and verify presence of Text Fallback Tables for diagrams.
+- **Optimized Living Specifications**:
+  - `BRD_TRAINING_ATTENDANCE_SYSTEM.html`: Converted `.doc-meta` into native 2-column `.meta-table`, `.kpi-deck` into native 4-column `.kpi-table`, bracketed text badges, added 3-Tier Architecture Fallback Table and 3-Stage Duration Engine Workflow Fallback Table.
+  - `LUU_DO_THUAT_TOAN_DURATION_ENGINE.html`: Added 3-Stage Text Fallback Specification Table and print table styles.
+
 ---
 
 ## [1.5.0] - 2026-09-29
