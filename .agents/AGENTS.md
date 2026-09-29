@@ -116,10 +116,11 @@ The workspace includes automated quality auditor scripts under `scripts/` to enf
 Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào trong `docs/outputs/`:
 1. **Auto-Run Audit**: Agent **BẮT BUỘC** tự động chạy kiểm định chất lượng (thông qua `scripts/audit_outputs.py`).
 2. **Quy chuẩn thực thi**: Tuân thủ toàn diện [`.agents/rules/output_quality_standards.md`](file:///d:/repo/ba-zone/.agents/rules/output_quality_standards.md) với 8 tiêu chí kiểm định tự động:
-   - **Cấu trúc & Thứ bậc (Structure & Hierarchy)**: Đầy đủ 6 trường Document Control metadata, Mục tiêu SMART, Scope in/out phân kỳ rõ ràng; thứ bậc tiêu đề H1 -> H2 -> H3 tuần tự, không nhảy cóc.
+   - **Cấu trúc & Thứ bậc (Structure & Hierarchy)**: Đầy đủ 6 trường Document Control metadata, **Mục lục tổng quan (Table of Contents)** và **Trang ký duyệt (Sign-off Page)** đặt ngay đầu tài liệu theo mẫu chuẩn Ms. Hân (`NVL_ITD_SDD`); Scope in/out phân kỳ rõ ràng; thứ bậc tiêu đề H1 -> H2 -> H3 tuần tự, không nhảy cóc.
    - **Định dạng & Chống tràn trang (Anti-Overflow Format)**: Bảng có cột nội dung dài tối đa 4 cột (tách bảng theo từng phân kỳ nếu nhiều cột); khóa cứng CSS `table-layout: fixed; width: 100%; word-break: break-word;` và `@page { size: A4 portrait; margin: 12mm 10mm; }` trên toàn bộ file HTML; cân bằng số cột dòng header và body rows.
    - **Tính toàn vẹn cú pháp Markdown/HTML**: Thẻ mở phải có thẻ đóng đối ứng (không để sót thẻ unclosed `**`, `*`, ```` ` ````); không lỗi cú pháp HTML.
    - **Chính tả tiếng Việt & Chuẩn mực giao tiếp (Vietnamese Spelling & Tone)**: Quét từ điển lỗi chính tả BA (bắt buộc: `giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`, `lưu trữ`...); không lỗi vỡ font UTF-8 (Mojibake); không đặt dấu cách trước dấu câu; dùng danh xưng ngoại giao tập thể ("Phòng TRC phối hợp...", không nêu đích danh giảng viên như bên gây nghẽn).
+   - **Chuẩn Mực Từ Ngữ Doanh Nghiệp & Chống "Mùi AI" (Anti-AI Smell)**: Tuân thủ toàn diện [`.agents/rules/nvg_corporate_wording_standards.md`](file:///d:/repo/ba-zone/.agents/rules/nvg_corporate_wording_standards.md). Cấm tiệt từ ngữ khoa trương ("triệt tiêu hoàn toàn", "siêu tốc", "vượt trội", "đột phá", "chuẩn xác 100%"), cấm lý thuyết sách vở (định nghĩa SMART, Use Case 16 trường Karl Wiegers); bắt buộc dùng bảng đặc tả UI Field Specs 5 cột (`TT` | `Tên trường thông tin` | `Loại` | `Business rule` | `Bắt buộc`) và Ma trận Notification (Teams/Email).
    - **Thuật ngữ chuẩn NVG**: Bắt buộc chuẩn hóa Ma trận phân quyền / thẩm quyền thành **"AM" (Authority Matrix)**.
    - **Dev Architecture Spine 2026**: Zero local auth, Ma trận AM 2 tầng kèm Data Scope, CSDL prefix `{prefix}_`, Strict Soft-delete 100%, Async Queue cho batch jobs.
    - **Enterprise NDA Sanitization**: Không rò rỉ PII nhân sự, credential bí mật hoặc định danh hợp đồng bảo mật.
@@ -140,6 +141,7 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
   - Ms. Trang (Giám đốc Bộ phận Quản lý CĐS): `itc.gdbp.4@novagroup.vn`
   - Ms. Tú (Chuyên gia Quản lý Dự án - PMO): `itc.cg.3@novagroup.vn` | SĐT: `0397479999`
   - Ms. Khanh (Chuyên viên Cao cấp BA PM QLCH): `itc.cvcc.3@novagroup.vn` | SĐT: `0904884874`
+  - Ms. Hân (Chuyên viên BA / Tác giả mẫu chuẩn NVL_ITD_SDD): Vũ Thị Hân (ITC-NVG)
 - **Quy chuẩn Kiến trúc Kỹ thuật (Dev Architecture Baseline 2026)**:
   - Tuân thủ toàn diện các quy ước tại `.agents/rules/dev_architecture_conventions.md` và `docs/guidelines/ARCHITECTURE-SPINE.md`.
   - Zero Local Auth (SSO qua Application Gateway).
