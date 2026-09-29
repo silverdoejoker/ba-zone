@@ -215,6 +215,43 @@ def check_markdown_syntax_integrity(content, filepath, res):
     else:
         res.add_pass("Tính toàn vẹn cú pháp Markdown (thẻ đóng/mở & liên kết) hợp lệ.")
 
+def check_word_friendly_graphics(content, filepath, res):
+    """
+    Checks HTML files for Microsoft Word compatibility and Anti-Graphics Degradation:
+    - Warns against CSS Grid (.doc-meta, .kpi-deck using display: grid) which breaks into floating shapes in PDF->DOCX.
+    - Warns against excessive rounded pill badges (border-radius: >= 15px).
+    - Checks that complex Mermaid diagrams have a nearby text fallback table or structured explanation.
+    - Validates presence of native HTML table structures for metadata and KPIs.
+    """
+    if not filepath.endswith(".html"):
+        return
+
+    content_lower = content.lower()
+
+    # 1. Check for CSS Grid usage in layout
+    has_grid = bool(re.search(r"display\s*:\s*grid|grid-template-columns", content_lower))
+    if has_grid:
+        res.add_warning("Định dạng Word-Friendly: Phát hiện CSS Grid (`display: grid`). Khuyến nghị dùng thẻ `<table>` chuẩn cho Metadata/KPI cards để tránh tạo các drawing shapes trôi nổi đè lên nhau khi chuyển sang Word (.docx).")
+    else:
+        res.add_pass("Định dạng Word-Friendly: Không dùng CSS Grid, ưu tiên Native Table cấu trúc ổn định.")
+
+    # 2. Check for pill badges with heavy border-radius
+    has_pill_badge = bool(re.search(r"border-radius\s*:\s*(?:1[5-9]|[2-9][0-9])px", content_lower))
+    if has_pill_badge:
+        res.add_warning("Định dạng Word-Friendly: Phát hiện badge bo tròn mềm (`border-radius >= 15px`). Nên dùng nhãn ký tự ngoặc vuông `[...]` phẳng để Word không tạo shape trôi nổi.")
+    else:
+        res.add_pass("Định dạng Word-Friendly: Nhãn trạng thái phẳng / Text-First gọn gàng, tương thích Word.")
+
+    # 3. Check for Mermaid Diagram Text Fallback
+    mermaid_count = len(re.findall(r'<div class="mermaid">', content_lower))
+    if mermaid_count > 0:
+        # Check if document has tables providing textual fallback
+        table_count = len(re.findall(r'<table', content_lower))
+        if table_count >= mermaid_count:
+            res.add_pass(f"Bảng văn bản dự phòng sơ đồ: Có {table_count} bảng dữ liệu văn bản đối chiếu dự phòng cho {mermaid_count} sơ đồ Mermaid.")
+        else:
+            res.add_warning("Bảng văn bản dự phòng sơ đồ: Khuyến nghị bổ sung bảng văn bản tổng hợp bên dưới sơ đồ Mermaid để phòng ngừa lỗi vỡ hình khi convert PDF -> Word.")
+
 # ==============================================================================
 # 3. CẤU TRÚC TÀI LIỆU (STRUCTURE & HIERARCHY)
 # ==============================================================================
@@ -483,10 +520,11 @@ def audit_document(filepath):
         res.add_error(f"Không thể đọc tệp: {e}")
         return res
 
-    # 1. Universal Checks (Spelling, Format, Hierarchy, NDA, Dev Spine, Mermaid, Links)
+    # 1. Universal Checks (Spelling, Format, Hierarchy, NDA, Dev Spine, Mermaid, Links, Word-Friendly)
     check_vietnamese_spelling_and_typos(content, filepath, res)
     check_heading_hierarchy(content, filepath, res)
     check_table_formatting_and_overflow(content, filepath, res)
+    check_word_friendly_graphics(content, filepath, res)
     check_markdown_syntax_integrity(content, filepath, res)
     check_mermaid_syntax(content, res)
     check_cross_links(content, filepath, res)

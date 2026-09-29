@@ -1,10 +1,11 @@
 # Quy Chuẩn Kiểm Định Chất Lượng Đầu Ra (Output Quality & Standards Rule)
 
 ## Mục Đích & Phạm Vi Áp Dụng
-Tất cả các tài liệu đặc tả nghiệp vụ, kiến trúc giải pháp, báo cáo phân tích, kế hoạch hành động và biên bản họp lưu trữ trong `docs/outputs/` (dưới cả định dạng `.md` và `.html`) **BẮT BUỘC** phải tuân thủ nghiêm ngặt 3 trụ cột chất lượng:
+Tất cả các tài liệu đặc tả nghiệp vụ, kiến trúc giải pháp, báo cáo phân tích, kế hoạch hành động và biên bản họp lưu trữ trong `docs/outputs/` (dưới cả định dạng `.md` và `.html`) **BẮT BUỘC** phải tuân thủ nghiêm ngặt 4 trụ cột chất lượng:
 1. **Cấu Trúc Tài Liệu (Structure Standards)**
 2. **Định Dạng & Chống Tràn Trang (Format & Anti-Overflow Standards)**
 3. **Chính Tả Tiếng Việt & Chuẩn Mực Giao Tiếp Doanh Nghiệp (Spelling & BA Terminology)**
+4. **Thiết Kế Text-First & Tương Thích Microsoft Word (Word-Friendly & Anti-Graphics Degradation)**
 
 Quy chuẩn này được thực thi tự động qua kịch bản `scripts/audit_outputs.py` và là điều kiện tiên quyết (Gatekeeper) trước khi bàn giao bất kỳ tài liệu nào cho người dùng hoặc xuất bản ra khách hàng / Hội đồng thẩm định.
 
@@ -139,6 +140,41 @@ Script audit sẽ chặn và báo lỗi nếu phát hiện các từ sai chính 
   - Trong mục Giả định, Tồn đọng (Open Clarifications), Đề xuất & Kết luận: **Không nêu đích danh cá nhân giảng viên/chuyên gia như một bên gây nghẽn tiến độ**.
   - Luôn sử dụng danh xưng tập thể ngoại giao: *"Phòng TRC phối hợp cung cấp thêm thông tin..."*, *"Ban Đào tạo TRC cử đầu mối thống nhất tiêu chí..."*.
   - Nội bộ ITC làm việc trao đổi trực tiếp để thống nhất phương án, không đưa các trao đổi ad-hoc hoặc việc giao việc nội bộ vào tài liệu chính thức gửi cho Business.
+
+---
+
+## TRỤ CỘT IV: THIẾT KẾ TEXT-FIRST & TƯƠNG THÍCH MICROSOFT WORD (WORD-FRIENDLY & ANTI-GRAPHICS DEGRADATION)
+
+### 1. Triết Lý Cốt Lõi: Text & Table Native Thay Thế Graphics Phù Phiếm
+Khi tài liệu HTML được xuất sang PDF rồi chuyển đổi sang Microsoft Word (`.docx`) để gửi đi thẩm định, duyệt ký hoặc trao đổi với đối tác:
+- **Nguyên nhân vỡ layout:** Trình biên dịch Word và công cụ convert PDF $\rightarrow$ DOCX không hỗ trợ CSS Grid hiện đại (`display: grid`) hay Flexbox đa chiều phức tạp. Chúng sẽ bóc tách các thẻ `div` thành hàng loạt khung vẽ tự do (Floating Drawing Canvas / Word Shapes / Text Frames) nằm đè lên nhau, lệch lề và buộc người dùng phải căn chỉnh thủ công rất tốn thời gian.
+- **Giải pháp chuẩn hóa:** Sử dụng **Bảng thuần (Native HTML Table) và Thẻ Text ngữ nghĩa**. Microsoft Word xử lý thẻ `<table>` với độ tương thích 100%, tự động chuyển hóa thành bảng Word chuẩn (Native Word Table), giữ nguyên vẹn cấu trúc dòng/cột mà không sinh ra bất kỳ drawing shape nào.
+
+### 2. Chuẩn Hóa Bố Cục Thẻ Metadata & Chỉ Số KPI Thành Native Table
+- **Khối Kiểm Soát Tài Liệu (Document Metadata Block):**
+  - **CẤM:** Dùng CSS Grid `display: grid; grid-template-columns: repeat(2, 1fr)`.
+  - **BẮT BUỘC:** Dùng bảng HTML 2 cột (`<table class="meta-table">`) với các dòng `<tr><td style="width: 50%;">...</td><td style="width: 50%;">...</td></tr>`.
+- **Khối Thẻ KPI (KPI Decks / Metric Cards):**
+  - **CẤM:** Dùng CSS Grid `grid-template-columns: repeat(4, 1fr)` kết hợp `box-shadow` và `border-radius: 8px`.
+  - **BẮT BUỘC:** Dùng bảng HTML 1 dòng 4 cột (`<table class="kpi-table">`), mỗi ô `<td>` căn giữa, có viền nét mảnh nhẹ (`border: 1px solid #d0d7de`) và màu nền xám nhạt (`background: #fafbfc`). Khi sang Word, khối này trở thành 1 bảng Word cố định 4 cột ngay ngắn.
+
+### 3. Chuẩn Hóa Huy Hiệu (Badges) Thành Nhãn Ký Tự Ngoặc Vuông (Text-First Labels)
+- **CẤM:** Lạm dụng các thẻ `<span>` bo tròn dạng viên thuốc mềm (`border-radius: 20px`, `border-radius: 12px`, `display: inline-block`). Trong PDF-to-Word, mỗi viên thuốc sẽ bị bóc tách thành một vector shape riêng biệt, làm chữ bên trong nhảy hàng hoặc lệch tâm.
+- **BẮT BUỘC:** Sử dụng ký tự ngoặc vuông văn bản kết hợp in đậm và kiểu dáng phẳng vuông góc:
+  - Chuẩn: `<strong>[NVG-ITD-SOP14.F01 · DRAFT v0.2]</strong>`
+  - Chuẩn: `<strong>[SẴN SÀNG PILOT — 9 TÍNH NĂNG]</strong>`
+  - Chuẩn: `<strong>[TÍCH HỢP SAU PILOT — 4 TÍNH NĂNG]</strong>`
+  - Styling bổ trợ: `padding: 2px 6px; border: 1px solid #cce0ff; background: #f0f4ff; font-size: 11px;` (chỉ dùng `border-radius: 2px` hoặc không bo góc).
+
+### 4. Bắt Buộc Đính Kèm Bảng Văn Bản Dự Phòng Dưới Sơ Đồ (Diagram Text Fallback Table)
+- Mọi sơ đồ luồng dữ liệu hoặc kiến trúc hệ thống vẽ bằng Mermaid.js (SVG):
+  - **Vấn đề chuyển đổi:** Khi PDF convert sang Word, vector SVG thường bị biến thành các mảnh path rời rạc hoặc hình ảnh mờ chất lượng thấp.
+  - **Quy chuẩn bắt buộc:** Ngay dưới mỗi sơ đồ Mermaid, **BẮT BUỘC** đính kèm một **Bảng tổng hợp văn bản (Text Summary Table)** phân rã rõ ràng các tầng kiến trúc, phân hệ, phương thức kết nối hoặc các bước tuần tự của thuật toán.
+  - **Mục tiêu:** Kể cả khi toàn bộ sơ đồ đồ họa bị Word loại bỏ, người đọc tài liệu vẫn nắm bắt được 100% logic kỹ thuật và kiến trúc hệ thống mà không cần người viết phải vẽ lại sơ đồ.
+
+### 5. Khung Ghi Chú & Đặc Tả Use Case (Callout & Use Case Boxes)
+- **CẤM:** Dùng các khối có bóng đổ (`box-shadow`), bo viền cong lớn hoặc thẻ trôi nổi (`float: left/right`).
+- **BẮT BUỘC:** Dùng `<blockquote>` chuẩn hoặc thẻ `<div style="border-left: 3px solid #0052cc; background: #f8f9fa; padding: 12px 16px; margin: 14px 0;">`. Trình chuyển đổi Word nhận diện trực tiếp cấu trúc này thành paragraph border & paragraph shading native của Word mà không tạo ra floating shape.
 
 ---
 

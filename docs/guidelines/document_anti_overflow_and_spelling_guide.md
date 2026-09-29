@@ -130,3 +130,27 @@ th {
    - Các mốc phụ thuộc phải ghi rõ: *"Mốc thời gian do PMO (Ms. Tú) và Lãnh đạo ấn định trong Master Schedule (`Lich trinh Du an Chuyen doi so - TRC.xlsx`)"*.
 3. **Nguyên tắc trao đổi nội bộ ITC:**
    - Toàn bộ việc phân chia task nội bộ (giữa BA, Dev Lead, QA, PMO) phải thực hiện qua trao đổi trực tiếp và quản lý qua Master Schedule của PMO, không đưa các trao đổi ad-hoc hoặc việc giao việc nội bộ vào tài liệu chính thức gửi cho Business.
+
+---
+
+## 6. Quy Chuẩn Thiết Kế Text-First & Tương Thích Microsoft Word (PDF $\rightarrow$ DOCX Zero Broken Graphics)
+
+Khi tài liệu đặc tả HTML/PDF được chuyển đổi sang Microsoft Word (`.docx`) để gửi đi thẩm định hoặc lưu trữ:
+
+### 6.1. Tại sao layout bị vỡ khi convert sang Word?
+1. **CSS Grid (`display: grid`):** Word không hỗ trợ CSS Grid. Trình convert biến mỗi ô `div` trong grid thành một **khung vẽ tự do (Drawing Canvas / Shape)** trôi nổi độc lập, dẫn đến hiện tượng các ô đè lên nhau, vỡ viền hoặc nhảy trang.
+2. **Pill Badges (`border-radius: 20px; display: inline-block`):** Mỗi thẻ huy hiệu bo tròn biến thành một hình vẽ vector riêng biệt, làm văn bản bên trong bị lệch tâm hoặc ngắt dòng lộn xộn.
+3. **Sơ đồ Mermaid SVG:** Khi convert sang Word, vector SVG thường bị vỡ thành hàng chục mảnh đường cong (broken vector paths) hoặc bị Word loại bỏ hoàn toàn thành khung trống.
+
+### 6.2. Các quy tắc chuẩn hóa "Text-First" bắt buộc
+1. **Dùng Bảng Thuần (Native Table) Thay Cho Card Grid:**
+   - **Document Metadata:** Thay `display: grid; grid-template-columns: repeat(2, 1fr)` bằng thẻ `<table>` 2 cột (`<table class="meta-table">`) với tỷ lệ chiều rộng `50% - 50%`.
+   - **KPI Metric Decks:** Thay 4 thẻ div `.kpi-card` bằng thẻ `<table>` 1 dòng 4 cột (`<table class="kpi-table">`), mỗi ô `25%` có viền mỏng và nền sáng. Word sẽ nhận diện 100% thành native Word Table cố định, không sinh shape trôi nổi.
+2. **Dùng Nhãn Ký Tự Ngoặc Vuông (Text-First Bracketed Labels):**
+   - Thay vì thẻ `span` bo tròn nhiều pixel, sử dụng ký tự văn bản: `<strong>[NVG-ITD-SOP14.F01 · DRAFT v0.2]</strong>` hoặc `<strong>[SẴN SÀNG PILOT — 9 TÍNH NĂNG]</strong>`. Dù Word có xóa bỏ CSS background thì nhãn văn bản vẫn rõ ràng, đẹp mắt và không tạo rác đồ họa.
+3. **Bắt Buộc Có Bảng Văn Bản Dự Phòng Dưới Sơ Đồ (Diagram Text Fallback Table):**
+   - Dưới bất kỳ sơ đồ Mermaid nào (Kiến trúc hệ thống, Lưu đồ thuật toán), luôn bổ sung một bảng văn bản tóm tắt các tầng / các bước / luồng dữ liệu tương ứng.
+   - Khi chuyển sang Word, người đọc vẫn có đầy đủ 100% dữ liệu kỹ thuật từ bảng văn bản mà không cần ai phải vẽ lại sơ đồ.
+4. **Hộp Ghi Chú & Use Case Hợp Chuẩn:**
+   - Dùng `<blockquote>` hoặc thẻ `<div>` có `border-left: 3px solid ...` và `background: #f8f9fa`, không dùng `box-shadow` hay `border-radius` lớn. Word tự động chuyển cấu trúc này thành paragraph shading và paragraph border native của Word.
+
