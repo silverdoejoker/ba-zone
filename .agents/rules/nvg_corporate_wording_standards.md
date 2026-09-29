@@ -67,3 +67,32 @@ Mỗi màn hình bắt buộc phải có bảng quy tắc chi tiết theo chuẩ
 | **Loại** | Kiểu điều khiển UI (UI Control Type) | Chỉ dùng các loại chuẩn: `Dropdownlist`, `Only view`, `Textbox`, `TextArea`, `Checkbox`, `Button`, `dd/mm/yyyy hh:mm`, `Image, pdf, word, excel` |
 | **Business rule** | Quy tắc nghiệp vụ cụ thể | Ghi rõ logic xử lý: quy tắc sinh mã tự động, điều kiện ngày tháng, nguồn load dữ liệu từ Orgchart/bảng HRM, sự kiện bấm nút cập nhật trạng thái nào |
 | **Bắt buộc** | Thuộc tính bắt buộc nhập | Đánh dấu `x` nếu bắt buộc; để trống nếu không bắt buộc |
+
+---
+
+## 5. Chuẩn Ma Trận Thông Báo (Notification Matrix Standard)
+Theo chuẩn Ms. Hân (NVL_ITD_SDD trang 47-65), mọi sự kiện hệ thống phải lập ma trận thông báo rõ ràng kèm mẫu nội dung cụ thể:
+
+| Cột | Quy Cách Trình Bày |
+|---|---|
+| **STT** | Số thứ tự tăng dần |
+| **Sự kiện kích hoạt** | Hành động nghiệp vụ sinh ra thông báo (vd: Nộp đơn, Phê duyệt, Nhắc quẹt thẻ) |
+| **Kênh gửi** | `MS Teams Adaptive Card`, `Email`, `Push Notification OneNova`, `Loa / Màn hình POS` |
+| **Người nhận** | Đối tượng nhận thông báo (QLTT, Học viên, Thư ký, Giảng viên) |
+| **Thời điểm gửi** | Thời gian kích hoạt (Tức thì, trước giờ học 15p, 17:00 ngày kết thúc) |
+| **Mẫu nội dung thông báo** | Văn bản mẫu có placeholder cụ thể (vd: `[Họ tên]`, `[Tên lớp]`, `[Lý do]`) |
+
+---
+
+## 6. Quy Chuẩn Phông Chữ Times New Roman & Font Size 12pt
+- **Phông chữ duy nhất:** Bắt buộc sử dụng phông chữ **`Times New Roman`** (`font-family: 'Times New Roman', Times, serif;`) cho 100% tài liệu xuất bản và deliverable HTML/Word.
+- **Cỡ chữ chuẩn:**
+  - **Body text (Thân văn bản):** **`12pt`** (line-height: 1.5, màu chữ `#000000`).
+  - **Bảng biểu (`table`, `th`, `td`):** **`11pt`** (line-height: 1.45) để chống tràn lề A4.
+  - **Tiêu đề H1:** **`18pt`** Bold.
+  - **Tiêu đề H2:** **`13.5pt - 14pt`** Bold.
+  - **Tiêu đề H3:** **`12.5pt - 13pt`** Bold.
+  - **Tiêu đề H4:** **`12pt`** Bold / Italic.
+  - **Khung hộp (Boxes):** **`12pt`**.
+- Không sử dụng font không chân (sans-serif) hoặc kích thước nhỏ dạng `13px` / `14px` làm phá vỡ chuẩn 12pt của tập đoàn.
+

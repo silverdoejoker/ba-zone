@@ -77,12 +77,24 @@ th {
 }
 ```
 
-### 3. Tính Toàn Vẹn Cú Pháp Markdown (Syntax Integrity)
+### 3. Quy Chuẩn Phông Chữ & Cỡ Chữ Doanh Nghiệp (Corporate Typography Standards)
+- **Phông chữ chuẩn (Standard Corporate Font):** Toàn bộ tài liệu chính thức (in ấn, xuất PDF, file HTML deliverable, Word) **BẮT BUỘC** sử dụng thống nhất phông chữ **`Times New Roman`** (`font-family: 'Times New Roman', Times, serif`). Tuyệt đối không dùng các font không chân hiện đại (Inter, Roboto, Arial, Segoe UI) trong văn bản quy chuẩn hành chính doanh nghiệp.
+- **Cỡ chữ chuẩn (Font Sizes):**
+  - **Nội dung thân văn bản (Body text, Paragraphs `<p>`, Danh sách `<ul>/<ol>`):** **12pt** (line-height: 1.5, màu chữ `#000000`).
+  - **Bảng biểu (`<table>`, `<th>`, `<td>`), Metadata table, KPI sub-labels:** **11pt** (line-height: 1.45) để vừa vặn với chiều ngang khổ A4 Portrait và không bị tràn cột khi xuất sang Word.
+  - **Tiêu đề chính H1:** **18pt** (Bold, căn giữa hoặc căn lề trái).
+  - **Tiêu đề phân mục H2:** **13.5pt - 14pt** (Bold, in hoa).
+  - **Tiêu đề tiểu mục H3:** **12.5pt - 13pt** (Bold).
+  - **Tiêu đề H4:** **12pt** (Bold / Nghiêng).
+  - **Khung thông tin (Callout, Conclusion, Use Case boxes):** **12pt** (line-height: 1.5).
+- **Màu chữ in ấn:** Bắt buộc sử dụng màu đen chuẩn (`#000000` hoặc `#111111`), không sử dụng màu xám mờ khó đọc khi chuyển đổi sang Word hoặc in ấn tài liệu.
+
+### 4. Tính Toàn Vẹn Cú Pháp Markdown (Syntax Integrity)
 - **Thẻ mở phải có thẻ đóng đối ứng:** Tuyệt đối không để sót thẻ Markdown mở mà quên đóng, ví dụ `**nội dung` thiếu dấu `**` đóng, hoặc `` `code `` thiếu dấu đóng backtick.
 - **Liên kết nội bộ (Cross-links):** Mọi cú pháp `[Tên](đường_dẫn)` phải trỏ chính xác đến file đang tồn tại thực tế.
 - **Sơ đồ Mermaid:** 100% diagram phải hợp lệ cú pháp, có keyword mở đầu chuẩn (`flowchart`, `graph`, `sequenceDiagram`, `erDiagram`).
 
-### 4. Quy Cách Dấu Câu & Khoảng Trắng (Typography & Spacing)
+### 5. Quy Cách Dấu Câu & Khoảng Trắng (Typography & Spacing)
 - **Không đặt khoảng trắng trước dấu câu:** Sai: `tính năng ,` hoặc `hệ thống .` hoặc `lưu trữ :`. Đúng: `tính năng,`, `hệ thống.`, `lưu trữ:`.
 - **Bắt buộc có 01 khoảng trắng sau dấu câu:** Sai: `tính năng,sau đó`. Đúng: `tính năng, sau đó`.
 - **Không lặp dấu câu bất thường:** Trừ dấu ba chấm (`...`), không sử dụng `??`, `!!`, `::`, `..`.
