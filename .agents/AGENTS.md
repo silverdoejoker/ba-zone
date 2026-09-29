@@ -115,15 +115,17 @@ The workspace includes automated quality auditor scripts under `scripts/` to enf
 ## Mandatory Post-Generation Auto-Audit Hook (Quy trình Tự Động Audit Sau Khi Tạo Tài Liệu)
 Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào trong `docs/outputs/`:
 1. **Auto-Run Audit**: Agent **BẮT BUỘC** tự động chạy kiểm định chất lượng (thông qua `scripts/audit_outputs.py`).
-2. **6 Tiêu chí kiểm định tự động**:
-   - **Cấu trúc & Template**: Đầy đủ Document Control metadata, Mục tiêu SMART, Scope in/out, Core Functional Modules, Ma trận Fit-Gap.
+2. **Quy chuẩn thực thi**: Tuân thủ toàn diện [`.agents/rules/output_quality_standards.md`](file:///d:/repo/ba-zone/.agents/rules/output_quality_standards.md) với 8 tiêu chí kiểm định tự động:
+   - **Cấu trúc & Thứ bậc (Structure & Hierarchy)**: Đầy đủ 6 trường Document Control metadata, Mục tiêu SMART, Scope in/out phân kỳ rõ ràng; thứ bậc tiêu đề H1 -> H2 -> H3 tuần tự, không nhảy cóc.
+   - **Định dạng & Chống tràn trang (Anti-Overflow Format)**: Bảng có cột nội dung dài tối đa 4 cột (tách bảng theo từng phân kỳ nếu nhiều cột); khóa cứng CSS `table-layout: fixed; width: 100%; word-break: break-word;` và `@page { size: A4 portrait; margin: 12mm 10mm; }` trên toàn bộ file HTML; cân bằng số cột dòng header và body rows.
+   - **Tính toàn vẹn cú pháp Markdown/HTML**: Thẻ mở phải có thẻ đóng đối ứng (không để sót thẻ unclosed `**`, `*`, ```` ` ````); không lỗi cú pháp HTML.
+   - **Chính tả tiếng Việt & Chuẩn mực giao tiếp (Vietnamese Spelling & Tone)**: Quét từ điển lỗi chính tả BA (bắt buộc: `giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`, `lưu trữ`...); không lỗi vỡ font UTF-8 (Mojibake); không đặt dấu cách trước dấu câu; dùng danh xưng ngoại giao tập thể ("Phòng TRC phối hợp...", không nêu đích danh giảng viên như bên gây nghẽn).
    - **Thuật ngữ chuẩn NVG**: Bắt buộc chuẩn hóa Ma trận phân quyền / thẩm quyền thành **"AM" (Authority Matrix)**.
    - **Dev Architecture Spine 2026**: Zero local auth, Ma trận AM 2 tầng kèm Data Scope, CSDL prefix `{prefix}_`, Strict Soft-delete 100%, Async Queue cho batch jobs.
    - **Enterprise NDA Sanitization**: Không rò rỉ PII nhân sự, credential bí mật hoặc định danh hợp đồng bảo mật.
-   - **Mermaid Diagrams**: Toàn bộ sơ đồ luồng, kiến trúc, sequence diagrams phải hợp lệ cú pháp 100%.
-   - **Cross-Links Integrity**: Mọi liên kết chéo nội bộ (`[link](...)`) phải trỏ chính xác đến các file tồn tại thực tế.
+   - **Mermaid Diagrams & Links Integrity**: Toàn bộ sơ đồ luồng/kiến trúc hợp lệ cú pháp 100%; mọi liên kết chéo nội bộ (`[link](...)`) phải trỏ chính xác đến file đang tồn tại thực tế.
 3. **Self-Healing Loop**: Nếu phát hiện cảnh báo hoặc lỗi, Agent tự động sửa lỗi ngay lập tức trước khi bàn giao.
-4. **Audit Status Report**: Luôn đính kèm trạng thái nghiệm thu chất lượng (Audit Status: PASS) khi phản hồi người dùng.
+4. **Audit Status Report**: Luôn đính kèm trạng thái nghiệm thu chất lượng (Audit Status: PASS - 0 Errors) khi phản hồi người dùng.
 
 ---
 
