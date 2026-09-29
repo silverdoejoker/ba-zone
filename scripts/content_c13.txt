@@ -1,0 +1,13 @@
+Phân tích, Xác định Yêu cầu Nghiệp vụ của các dự án (Kỳ thử việc: 07/09/2026 - 05/11/2026):
+
+1. Hệ thống Quản lý & Điểm danh Đào tạo (TAS - REF-TAS-2026):
+- Khảo sát hiện trạng & phân tích Fit-Gap: Tiếp nhận bài toán, cài đặt App OneNova UAT; chủ trì họp Demo & khảo sát nhu cầu Khối Đào tạo; hoàn thành phân tích Fit-Gap (kế thừa PM Quản lý Cuộc họp) và Biên bản cuộc họp (MoM) (Hoàn thành trước 22/09/2026).
+- Hoàn thành Yêu cầu Nghiệp vụ (BRD): Xây dựng và trình ký phê duyệt BRD Official v2.0 (REF-TAS-2026) được Giám đốc CĐS, PMO và Khối Đào tạo thống nhất nghiệm thu (Hoàn thành trước 02/10/2026).
+- Hoàn thành Giải pháp Hệ thống (SRS): Biên soạn bộ Đặc tả SRS chi tiết (Use Cases, User Stories INVEST) cho các tính năng Core (Quản lý lịch đào tạo, Sinh trắc FaceID/NFC, Báo vắng Teams Bot, Đồng bộ E-Office) kèm Ma trận AM bàn giao Đội Dev (Hoàn thành trước 18/10/2026).
+- Chuẩn bị Hồ sơ Kiểm thử Nghiệm thu (UAT Package): Xây dựng Ma trận kịch bản kiểm thử (UAT Test Cases Matrix phủ 100% Use Cases) và Tài liệu Hướng dẫn sử dụng (User Guide) sẵn sàng cho Khối Đào tạo nghiệm thu (Hoàn thành trước 05/11/2026).
+
+2. Phân hệ BĐS Cho thuê Thương mại - Hệ thống GMS (GMS.NLE - REF-GMS-2026):
+- Khảo sát ranh giới & chốt phạm vi: Nghiên cứu phiếu yêu cầu CR NLE, khảo sát thực tế As-Is phân hệ Rent & Rent trên UAT; xây dựng Clarification Checklist và chủ trì Workshop chốt Scope với TGĐ NLE & đại diện NAM, phát hành Gap Matrix (Hoàn thành trước 30/09/2026).
+- Hoàn thành Yêu cầu Nghiệp vụ (URD/BRD): Biên soạn và trình ký duyệt URD/BRD CR Leasing bổ sung các luồng cốt lõi (Pipeline Dự án, CRM Phễu Leasing, Công thức thuê % Turnover Rent, Vòng đời Fit-out, Tenant Scoring) & chốt lộ trình Phasing (Hoàn thành trước 12/10/2026).
+- Thiết kế Wireframe/Prototype & Ma trận Thẩm quyền: Xây dựng Ma trận Phân quyền & Thẩm quyền (Ma trận AM) chuẩn NVG và Prototype luồng CRM Leasing trình TGĐ NLE & PMO sign-off trực quan (Hoàn thành trước 22/10/2026).
+- Hoàn thành Giải pháp Hệ thống (SRS Phase 1): Phân rã bộ Đặc tả chi tiết Use Cases & User Stories cho các phân hệ ưu tiên Phase 1 bàn giao Đội Dev (Hoàn thành trước 05/11/2026).
