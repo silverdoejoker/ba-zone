@@ -127,10 +127,10 @@ Mọi giải pháp phần mềm liên quan đến Nhân sự và Quản trị C�
 11. *Chia tay* (Exit Survey / Offboarding Asset Return)
 12. *Alumni & Người đại sứ* (Rehire / Referral Network)
 
-### 5.2 Cơ chế Phân rã KPI & Ma trận Phân quyền / Thẩm quyền (Authority Matrix - AM)
+### 5.2 Cơ chế Phân rã KPI & Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM)
 - **Cơ chế Cascade KPI**: Phân rã mục tiêu chỉ số từ AOP Tập đoàn $\rightarrow$ TCT/BU $\rightarrow$ Khối/Ban $\rightarrow$ Phòng/Trung tâm $\rightarrow$ Nhóm/Team $\rightarrow$ Cá nhân.
 - **Quy tắc Trọng số**: Trọng số KPI tổng cộng tại mỗi cấp **phải đúng bằng 100%**.
-- **Ma trận AM (Authority Matrix)**: Mọi quy trình số hóa trên One Nova phải khai báo rõ ràng Ma trận Phân quyền & Thẩm quyền phê duyệt (AM) theo đúng cấp bậc, hạn mức phê duyệt và luồng ủy quyền hợp lệ.
+- **Ma trận AM (Approval Matrix)**: Mọi quy trình số hóa trên One Nova phải khai báo rõ ràng Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM) theo đúng cấp bậc, hạn mức phê duyệt và luồng ủy quyền hợp lệ. Tuyệt đối không dùng Authority Matrix.
 
 ---
 
@@ -139,7 +139,7 @@ Mọi giải pháp phần mềm liên quan đến Nhân sự và Quản trị C�
 Khi nhận bất kỳ Dự án hoặc Yêu cầu Số hóa mới nào trong Tập đoàn, BA **bắt buộc**:
 1. **Đối chiếu Lộ trình Wave**: Xác định giải pháp thuộc Wave nào trong Roadmap 2025-2030 để thiết lập phạm vi (Scope In/Out) phù hợp.
 2. **Kiến trúc Tích hợp**: Mọi ứng dụng mới đều phải thiết kế kết nối EDP (Enterprise Data Platform) qua API Gateway / ESB và tích hợp SSO One Nova.
-3. **Đặc tả Phân quyền**: Đổi toàn bộ các thuật ngữ cũ (RBAC, Phân quyền đơn thuần) thành **"Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)"** trong tất cả tài liệu URD, BRD, SRS và Test Plan.
+3. **Đặc tả Phân quyền & Phê duyệt**: Đổi toàn bộ các thuật ngữ cũ (RBAC, Phân quyền đơn thuần) thành **"Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM)"** hoặc **"Ma trận Phê duyệt (AM)"** trong tất cả tài liệu URD, BRD, SRS và Test Plan. Tuyệt đối không dùng thuật ngữ Authority Matrix.
 4. **Bảo mật NDA**: Lưu trữ tài liệu dưới dạng ẩn danh (Generalized) theo đúng chuẩn `enterprise-nda-sanitizer`.
 
 ---

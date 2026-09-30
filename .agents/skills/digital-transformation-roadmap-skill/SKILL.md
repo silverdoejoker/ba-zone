@@ -18,7 +18,7 @@ Skill này cung cấp tri thức nền tảng (Context Baseline & Architectural 
 Skill này được kích hoạt khi:
 - Nhận yêu cầu phân tích dự án mới, viết **BRD / URD / SRS / Use Case / User Story / UAT Test Plan**.
 - Cần đối chiếu tính tương thích kiến trúc của dự án với Lộ trình 5 Wave Chuyển đổi số 2025–2030.
-- Cần định hình mô hình phân quyền **Ma trận AM (Authority Matrix)** hoặc luồng tích hợp dữ liệu với **Enterprise Data Platform (EDP)** / **Enterprise Control Tower (ECT)**.
+- Cần định hình mô hình phân quyền **Ma trận AM (Approval Matrix)** hoặc luồng tích hợp dữ liệu với **Enterprise Data Platform (EDP)** / **Enterprise Control Tower (ECT)**.
 - Thiết kế luồng nghiệp vụ liên quan đến **Employee Journey 12 bước** hoặc **Cơ chế Phân rã KPI / OKR** trên nền tảng **One Nova**.
 
 ---
@@ -31,7 +31,7 @@ Khi cần thông tin chuyên sâu từng mảng, Agent tra cứu trực tiếp c
 |---|---|---|
 | **Kiến trúc Công nghệ & Dữ liệu** | `resources/architecture_blueprint.md` | 5 Tầng Kiến trúc, EDP Lakehouse (Bronze/Silver/Gold), ECT Command Center, ESB/API Gateway. |
 | **Mô hình Vận hành IT & Task-Force** | `resources/operating_model.md` | Mô hình IT-as-a-Business, Chu trình giao việc 6 bước với 6 Task-Forces, SLA & Chargeback. |
-| **Nền tảng One Nova & Employee Journey** | `resources/one_nova_platform.md` | Employee Journey 12 bước, Cascade KPI Trọng số 100%, Phân quyền AM (Authority Matrix). |
+| **Nền tảng One Nova & Employee Journey** | `resources/one_nova_platform.md` | Employee Journey 12 bước, Cascade KPI Trọng số 100%, Phân quyền AM (Approval Matrix). |
 
 ---
 

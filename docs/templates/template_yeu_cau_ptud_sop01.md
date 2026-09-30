@@ -65,7 +65,7 @@
 
 #### A. Yêu cầu chung
 * Đăng nhập tập trung qua hệ thống Single Sign-On (SSO MS Entra ID) theo email nhân viên.
-* Tự động phân quyền và giới hạn phạm vi dữ liệu theo Ma trận AM (Authority Matrix).
+* Tự động phân quyền và giới hạn phạm vi dữ liệu theo Ma trận AM (Approval Matrix).
 
 #### B. Yêu cầu nghiệp vụ chi tiết
 

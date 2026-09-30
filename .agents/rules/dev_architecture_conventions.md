@@ -11,8 +11,8 @@ Tài liệu quy định các nguyên tắc kiến trúc và kỹ thuật chuẩn
 
 ---
 
-## 2. Mô hình Ma trận AM & Phân tách 2 Tầng (Authority Matrix & Data Scope)
-- **Thuật ngữ chuẩn**: Luôn sử dụng **"Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)"** hoặc **"Ma trận AM"**.
+## 2. Mô hình Ma trận AM & Phân tách 2 Tầng (Approval Matrix & Data Scope)
+- **Thuật ngữ chuẩn**: Luôn sử dụng **"Ma trận Phê duyệt (Approval Matrix - AM)"** hoặc **"Ma trận Thẩm quyền Phê duyệt (AM)"** hoặc **"Ma trận AM"**. Tuyệt đối **KHÔNG dùng "Authority Matrix"** (NovaGroup không sử dụng thuật ngữ này).
 - **Cấu trúc 4 cấp**:
   $$\text{User / JobCode (Chức danh)} \longrightarrow \text{Role} \longrightarrow \text{Permission} \longrightarrow \text{Action (API Endpoint)}$$
 - **Phân tách 2 Tầng khi viết Đặc tả**:

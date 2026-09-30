@@ -3,7 +3,7 @@
 > **Tên tài liệu:** TÀI LIỆU THIẾT KẾ GIẢI PHÁP (SOLUTION ARCHITECTURE & DESIGN DOCUMENT - SAD / BRD-SOLUTION)  
 > **Đơn vị ban hành:** Khối Công nghệ Thông tin (NVG-ITC)  
 > **Áp dụng cho:** IT Business Analysts, Solution Architects, Technical Leads khi đặc tả giải pháp hệ thống chi tiết cho các ứng dụng phần mềm của Tập đoàn NovaGroup.  
-> **Quy chuẩn kiểm soát:** Tuân thủ chuẩn Ma trận Thẩm quyền (`AM - Authority Matrix`) và Tiêu chuẩn Kiến trúc `Dev Architecture Spine Baseline 2026`.
+> **Quy chuẩn kiểm soát:** Tuân thủ chuẩn Ma trận Phê duyệt (`AM - Approval Matrix`, cấm dùng Authority Matrix) và Tiêu chuẩn Kiến trúc `Dev Architecture Spine Baseline 2026`.
 
 ---
 
@@ -41,7 +41,7 @@
 
 | Thuật Ngữ / Viết Tắt | Tên Tiếng Anh Đầy Đủ | Giải Thích Định Nghĩa Nghiệp Vụ Tại NovaGroup |
 |---|---|---|
-| **AM** | **Authority Matrix** | **Ma trận Phân quyền & Thẩm quyền Phê duyệt** tại NovaGroup (thay thế thuật ngữ RBAC đơn thuần, phân tách Functional Permission và Security L7 Data Scope). |
+| **AM** | **Approval Matrix** | **Ma trận Phê duyệt / Ma trận Thẩm quyền Phê duyệt** tại NovaGroup (tuyệt đối không dùng *Authority Matrix*; thay thế thuật ngữ RBAC đơn thuần, phân tách Functional Permission và Security L7 Data Scope). |
 | **GFA** | Gross Floor Area | Tổng diện tích sàn xây dựng của dự án/tòa nhà do Khối Quản lý Tài sản (NAM) theo dõi. |
 | **NLA** | Net Lettable Area | Diện tích thực tế cho thuê thương mại, dùng để tính toán doanh thu và tỷ lệ lấp đầy (Occupancy Rate %). |
 | **Fit-out** | Tenant Interior Fit-out | Giai đoạn khách thuê thi công cải tạo, hoàn thiện nội thất gian hàng trước ngày mở cửa khai trương. |
@@ -75,7 +75,7 @@
 * **Phạm vi trong hệ thống (In-Scope Phase 1):** [Liệt kê các phân hệ, chức năng được xây dựng ngay].
 * **Phạm vi ngoài hệ thống (Out-of-Scope Phase 2):** [Liệt kê các tính năng hoãn lại giai đoạn sau để kiểm soát tiến độ].
 
-### 3.3. Quyền hạn sử dụng & Ma trận AM (Authority Matrix & Security L7)
+### 3.3. Quyền hạn sử dụng & Ma trận AM (Approval Matrix & Security L7)
 * Phân tách rõ ràng giữa **Quyền chức năng (Functional Permissions)** và **Phạm vi dữ liệu (Security L7 Data Scope)** theo quy chuẩn Dev Architecture Spine 2026.
 
 | Vai trò Nghiệp vụ (AM Role) | Mã Phân Quyền | Quyền Thao Tác Chức Năng | Thẩm Quyền Phê Duyệt | Phạm Vi Dữ Liệu Cho Phép (Data Scope) |

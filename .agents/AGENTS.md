@@ -121,7 +121,7 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
    - **Tính toàn vẹn cú pháp Markdown/HTML**: Thẻ mở phải có thẻ đóng đối ứng (không để sót thẻ unclosed `**`, `*`, ```` ` ````); không lỗi cú pháp HTML.
    - **Chính tả tiếng Việt & Chuẩn mực giao tiếp (Vietnamese Spelling & Tone)**: Quét từ điển lỗi chính tả BA (bắt buộc: `giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`, `lưu trữ`...); không lỗi vỡ font UTF-8 (Mojibake); không đặt dấu cách trước dấu câu; dùng danh xưng ngoại giao tập thể ("Phòng TRC phối hợp...", không nêu đích danh giảng viên như bên gây nghẽn).
    - **Chuẩn Mực Từ Ngữ Doanh Nghiệp & Chống "Mùi AI" (Anti-AI Smell)**: Tuân thủ toàn diện [`.agents/rules/nvg_corporate_wording_standards.md`](file:///d:/repo/ba-zone/.agents/rules/nvg_corporate_wording_standards.md). Cấm tiệt từ ngữ khoa trương ("triệt tiêu hoàn toàn", "siêu tốc", "vượt trội", "đột phá", "chuẩn xác 100%"), cấm lý thuyết sách vở (định nghĩa SMART, Use Case 16 trường Karl Wiegers); bắt buộc dùng bảng đặc tả UI Field Specs 5 cột (`TT` | `Tên trường thông tin` | `Loại` | `Business rule` | `Bắt buộc`) và Ma trận Notification (Teams/Email).
-   - **Thuật ngữ chuẩn NVG**: Bắt buộc chuẩn hóa Ma trận phân quyền / thẩm quyền thành **"AM" (Authority Matrix)**.
+   - **Thuật ngữ chuẩn NVG**: Bắt buộc chuẩn hóa Ma trận phê duyệt / thẩm quyền thành **"AM" (Approval Matrix)**. Tuyệt đối KHÔNG dùng *Authority Matrix* (NovaGroup không sử dụng thuật ngữ này).
    - **Dev Architecture Spine 2026**: Zero local auth, Ma trận AM 2 tầng kèm Data Scope, CSDL prefix `{prefix}_`, Strict Soft-delete 100%, Async Queue cho batch jobs.
    - **Enterprise NDA Sanitization**: Không rò rỉ PII nhân sự, credential bí mật hoặc định danh hợp đồng bảo mật.
    - **Mermaid Diagrams & Links Integrity**: Toàn bộ sơ đồ luồng/kiến trúc hợp lệ cú pháp 100%; mọi liên kết chéo nội bộ (`[link](...)`) phải trỏ chính xác đến file đang tồn tại thực tế.
@@ -133,11 +133,11 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
 ---
 
 ## Enterprise Domain & Terminology Conventions (Quy chuẩn thuật ngữ nghiệp vụ NVG)
-- **Ma trận Phân quyền & Thẩm quyền (Authority Matrix)**: 
-  - Tại NVG (NovaGroup / Nova Service / ITC), Ma trận phân quyền / thẩm quyền phê duyệt được gọi tắt chính thức là **'AM'** (Authority Matrix / Approval Matrix).
-  - Trong mọi tài liệu đặc tả (BRD, URD, PRD, SRS, Use Case, UAT):
-    - Đổi/chuẩn hóa các đề mục liên quan từ *RBAC* hoặc *Ma trận phân quyền* thành **"Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)"** hoặc **"Ma trận AM"**.
-    - Khi trao đổi với Stakeholders (PMO Ms. Tú, BA Ms. Khanh - Nguyễn Thụy Mai Khanh, Đào tạo, BOM): Luôn sử dụng thuật ngữ **"Ma trận AM"** hoặc **"AM"**.
+- **Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM)**: 
+  - Tại NVG (NovaGroup / Nova Service / ITC), Ma trận phê duyệt / thẩm quyền phê duyệt được gọi chính thức là **Approval Matrix (AM)** (Ma trận Phê duyệt / Ma trận Thẩm quyền Phê duyệt). Tuyệt đối **KHÔNG dùng "Authority Matrix"** (NovaGroup không sử dụng thuật ngữ này).
+  - Trong mọi tài liệu đặc tả (BRD, URD, PRD, SRS, Use Case, UAT, SOP14):
+    - Đổi/chuẩn hóa các đề mục liên quan từ *RBAC* hoặc *Ma trận phân quyền* thành **"Ma trận Phê duyệt (Approval Matrix - AM)"**, **"Ma trận Thẩm quyền Phê duyệt (AM)"** hoặc **"Ma trận AM"**.
+    - Khi trao đổi với Stakeholders (PMO Ms. Tú, BA Ms. Khanh - Nguyễn Thụy Mai Khanh, Đào tạo, BOM): Luôn sử dụng thuật ngữ **"Ma trận AM"** hoặc **"AM"** (Approval Matrix).
 - **Danh bạ định danh cán bộ ITC (Verified Directory)**:
   - Ms. Trang (Giám đốc Bộ phận Quản lý CĐS): `itc.gdbp.4@novagroup.vn`
   - Ms. Tú (Chuyên gia Quản lý Dự án - PMO): `itc.cg.3@novagroup.vn` | SĐT: `0397479999`
@@ -156,6 +156,6 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
 ## Agent Usage & Rules
 - All skills in `.agents/skills/` are automatically discovered by Antigravity AI Agent for project tasks.
 - Keep `SKILL.md` instructions and audit scripts synchronized whenever adding or modifying skill workflows.
-- Strictly adhere to NVG Terminology Conventions (AM for Authority Matrix) across all generated specifications and discussions.
+- Strictly adhere to NVG Terminology Conventions (AM for Approval Matrix; strictly ban "Authority Matrix") across all generated specifications and discussions.
 - Strictly enforce the Dev Architecture Baseline (`dev-architecture-spine-skill`) on all BRD, SRS, Use Case, Data Dictionary, and UAT artifacts.
 - Strictly execute the Mandatory Post-Generation Auto-Audit Hook on every document output.

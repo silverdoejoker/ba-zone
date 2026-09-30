@@ -19,7 +19,7 @@ Skill này cung cấp bộ khung chuẩn hóa kỹ thuật và checklist kiểm 
 Skill này được kích hoạt khi:
 - Lập mới hoặc rà soát tài liệu đặc tả: **BRD, URD, SRS, Use Case, User Story, API Contract, Data Dictionary**.
 - Xác định phạm vi (Scope in/out) liên quan đến Xác thực (SSO / Login), Quản trị người dùng và Phân quyền.
-- Thiết kế **Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)** và phân định ranh giới **Data Scope** (phạm vi theo dự án/khu vực).
+- Thiết kế **Ma trận Phê duyệt (Approval Matrix - AM)** và phân định ranh giới **Data Scope** (phạm vi theo dự án/khu vực). Tuyệt đối không dùng thuật ngữ Authority Matrix.
 - Thiết kế cơ sở dữ liệu sơ bộ, Data Dictionary hoặc luồng Import/Export dữ liệu lớn (Excel).
 - Đối chiếu (Gap Analysis) giữa tài liệu của BA với kiến trúc hệ thống (`ARCHITECTURE-SPINE.md` và `Architect-2026.png`).
 

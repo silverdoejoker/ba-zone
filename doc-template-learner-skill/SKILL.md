@@ -40,7 +40,7 @@ document_blueprint:
   reference_file: "docs/templates/template_brd_standard.md"
   output_language: "vi | en"
   tone: "Formal enterprise, clear operational contracts, measurable criteria"
-  authority_matrix: "Strictly AM (Authority Matrix)"
+  approval_matrix: "Strictly AM (Approval Matrix; ban Authority Matrix)"
   sections:
     - id: "sec-header"
       title: "Header & Document Control"
@@ -53,7 +53,7 @@ document_blueprint:
       format: "5-column Matrix: Priority (Ưu tiên 1/2), Code, Requirement, Detailed Scope, Deadline"
     - id: "sec-03"
       title: "3. Cách Tính Toán & Ma Trận Kịch Bản (Calculation Engine & Test Scenarios)"
-      format: "3.1. Business Rules Table (De-duplication, Pairing, Edge Truncation, Odd Swipes) + 3.2. 13-Case Test Matrix"
+      format: "3.1. Business Rules Table (De-duplication, Pairing, Edge Truncation, Odd Swipes) + 3.2. Flexible Test Scenarios Matrix (Dự án-specific)"
     - id: "sec-04"
       title: "4. Đặc Tả Use Cases Chi Tiết (Core Use Cases - Priority 1)"
       format: "6-field Concise Use Case Table: Actor, Precondition, Main Flow, Exceptions, Data Log, Postcondition"
@@ -80,7 +80,7 @@ Phase 5: PARITY AUDIT & HANDOVER → Verify 100% structural alignment & NVG AM c
 ---
 
 ## Mandatory Quality Rules for Generated BRDs:
-1. **Authority Matrix Terminology**: Bắt buộc chuẩn hóa thẩm quyền phê duyệt thành **"AM" (Authority Matrix)**. Tuyệt đối không dùng thuật ngữ phân quyền chung chung khi giao tiếp với Stakeholders NVG.
+1. **Approval Matrix Terminology**: Bắt buộc chuẩn hóa thẩm quyền phê duyệt thành **"AM" (Approval Matrix)**. Tuyệt đối không dùng *Authority Matrix* (NovaGroup không sử dụng thuật ngữ này). Không dùng thuật ngữ phân quyền chung chung khi giao tiếp với Stakeholders NVG.
 2. **Enterprise NDA Sanitization**: Tự động ẩn danh hóa thông tin nhân sự ngoài danh bạ đã xác thực (`Ms. Trang`, `Ms. Tú`, `Ms. Khanh`, `Minh`).
 3. **Internal Links Integrity**: Mọi liên kết chéo nội bộ `[link](...)` phải trỏ chính xác đến các file tồn tại trong `docs/`.
 4. **Mermaid Diagrams**: Mọi sơ đồ luồng quy trình phải hợp lệ cú pháp Mermaid 100%.

@@ -4,7 +4,7 @@
 > **Đơn vị ban hành:** Khối Công nghệ Thông tin & Chuyển đổi số (NVG-ITC)  
 > **Áp dụng cho:** IT Business Analysts, Solution Architects, Product Owners khi soạn thảo BRD, SAD, URD, FSD cho toàn bộ ứng dụng phần mềm tại Tập đoàn NovaGroup.  
 > **Quy chuẩn kiểm soát bắt buộc:**  
-> 1. Chuẩn hóa Ma trận Thẩm quyền thành **`AM - Authority Matrix`** (tuyệt đối không dùng thuật ngữ RBAC đơn thuần; bắt buộc phân tách 2 tầng: Quyền chức năng và Phạm vi dữ liệu `Security L7 Data Scope`).  
+> 1. Chuẩn hóa Ma trận Phê duyệt thành **`AM - Approval Matrix`** (tại NovaGroup không dùng thuật ngữ Authority Matrix; tuyệt đối không dùng RBAC đơn thuần; bắt buộc phân tách 2 tầng: Quyền chức năng và Phạm vi dữ liệu `Security L7 Data Scope`).  
 > 2. Tuân thủ `enterprise-nda-sanitizer` (bảo vệ thông tin PII, định danh hợp đồng và credential bảo mật).  
 > 3. Tuân thủ Tiêu chuẩn Kiến trúc `Dev Architecture Spine Baseline 2026` (Zero Local Auth qua SSO Gateway, tiền tố CSDL `{prefix}_*`, Strict Soft-delete 100%, Async Queue cho tác vụ nặng).  
 > 4. Phân định rõ ràng phương thức kết nối: **API vs Direct DB vs Bán tự động (File Import)**.
@@ -37,7 +37,7 @@
 3. [Tổng Quan Ứng Dụng (Application Overview)](#3-tổng-quan-ứng-dụng-application-overview)
    - 3.1. [Mục đích & Chỉ số SMART](#31-mục-đích--chỉ-số-smart-goals)
    - 3.2. [Phạm vi hệ thống & Ranh giới Pilot / Go-Live](#32-phạm-vi-hệ-thống--ranh-giới-pilot--go-live)
-   - 3.3. [Quyền hạn sử dụng & Ma trận AM (Authority Matrix)](#33-quyền-hạn-sử-dụng--ma-trận-am-authority-matrix)
+   - 3.3. [Quyền hạn sử dụng & Ma trận AM (Approval Matrix)](#33-quyền-hạn-sử-dụng--ma-trận-am-approval-matrix)
 4. [Mô Tả Yêu Cầu Chức Năng (Functional Requirements)](#4-mô-tả-yêu-cầu-chức-năng-functional-requirements)
    - 4.1. [Danh sách yêu cầu chức năng & Phân hệ nghiệp vụ](#41-danh-sách-yêu-cầu-chức-năng--phân-hệ-nghiệp-vụ-feature-matrix)
    - 4.2. [Đặc tả Use Cases chi tiết (Core Use Cases)](#42-đặc-tả-use-cases-chi-tiết-core-use-cases)
@@ -82,7 +82,7 @@
 
 | Thuật Ngữ / Viết Tắt | Tên Tiếng Anh Đầy Đủ | Giải Thích Định Nghĩa Nghiệp Vụ Tại NovaGroup |
 |---|---|---|
-| **AM** | **Authority Matrix** | **Ma trận Phân quyền & Thẩm quyền Phê duyệt** tại NovaGroup (thay thế thuật ngữ RBAC đơn thuần, phân tách Functional Permission và Security L7 Data Scope). |
+| **AM** | **Approval Matrix** | **Ma trận Phê duyệt / Ma trận Thẩm quyền Phê duyệt** tại NovaGroup (tuyệt đối không dùng *Authority Matrix*; thay thế thuật ngữ RBAC đơn thuần, phân tách Functional Permission và Security L7 Data Scope). |
 | **EDP** | Enterprise Data Platform | Nền tảng dữ liệu tập trung (Lakehouse) của Tập đoàn NovaGroup. |
 | **SSO** | Single Sign-On | Đăng nhập một lần cho toàn bộ người dùng nội bộ thông qua Application Gateway + Microsoft Entra ID. |
 | **Server Clock** | Authoritative Server Clock | Đồng hồ máy chủ chuẩn (múi giờ GMT+7, chính xác đến giây), là căn cứ pháp lý duy nhất để ghi nhận log. |
@@ -119,7 +119,7 @@
 * **Phạm vi trong hệ thống (In-Scope Phase 1 / Pilot):** [Liệt kê các module, chức năng MVP bắt buộc hoàn thành trong đợt đầu].
 * **Phạm vi ngoài hệ thống (Out-of-Scope Phase 2 / Future):** [Liệt kê các tính năng nâng cấp hoãn lại giai đoạn sau để bảo vệ tiến độ].
 
-### 3.3. Quyền hạn sử dụng & Ma trận AM (Authority Matrix)
+### 3.3. Quyền hạn sử dụng & Ma trận AM (Approval Matrix)
 Tuân thủ toàn diện chuẩn mực kiến trúc `Dev Architecture Spine Baseline 2026`: Phân tách ranh giới rõ ràng giữa **Quyền chức năng (Functional Permissions)** và **Phạm vi dữ liệu (Security L7 Data Scope)**:
 
 | Mã Quyền | Vai Trò Nghiệp Vụ (AM Role) | Quyền Thao Tác Chức Năng | Thẩm Quyền Phê Duyệt | Phạm Vi Dữ Liệu Cho Phép (Data Scope) |

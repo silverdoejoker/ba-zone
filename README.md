@@ -150,7 +150,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit-all.ps1
    - Chuẩn hóa Text-First & Word-Friendly: Cấm CSS Grid, card decks trôi nổi và badge viên thuốc bo tròn lớn; bắt buộc dùng `<table>` chuẩn cho Metadata/KPI metrics; luôn đính kèm Text Fallback Table dưới sơ đồ Mermaid để chuyển PDF $\rightarrow$ DOCX không bị vỡ layout hoặc phải sửa manual.
    - Kiểm soát ngân sách cột bảng: Tối đa 4 cột cho text dài, bắt buộc tách bảng theo từng phân kỳ.
    - Rà soát từ điển lỗi chính tả BA (26+ cặp từ: `giảng viên`, `thư ký`, `quy trình`, `chuyên cần`, `điểm danh`, `xử lý`...).
-   - Kiểm tra giọng văn ngoại giao doanh nghiệp, chuẩn hóa Ma trận `AM (Authority Matrix)` và Dev Architecture Spine Baseline 2026.
+   - Kiểm tra giọng văn ngoại giao doanh nghiệp, chuẩn hóa Ma trận `AM (Approval Matrix)` và Dev Architecture Spine Baseline 2026.
 
 ---
 

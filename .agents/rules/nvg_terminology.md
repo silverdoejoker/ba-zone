@@ -1,12 +1,14 @@
 # NVG Enterprise Terminology & Business Conventions
 
-## 1. Authority Matrix (AM)
-- **Tên đầy đủ:** Ma trận Phân quyền & Thẩm quyền phê duyệt (Authority Matrix / Approval Matrix).
+## 1. Approval Matrix (AM)
+- **Tên đầy đủ tiếng Anh:** **Approval Matrix** (Tuyệt đối KHÔNG dùng *Authority Matrix* - NovaGroup không sử dụng thuật ngữ này).
+- **Tên tiếng Việt chuẩn:** Ma trận Phê duyệt / Ma trận Thẩm quyền Phê duyệt (gọi tắt: **Ma trận AM**).
 - **Tên viết tắt bắt buộc:** **AM**.
 - **Quy tắc áp dụng:**
-  - Tại tập đoàn NVG (NovaGroup / Nova Service / ITC), khái niệm phân quyền hệ thống và thẩm quyền phê duyệt luôn được gọi tắt là **AM**.
+  - Tại tập đoàn NVG (NovaGroup / Nova Service / ITC), khái niệm phân quyền hệ thống và thẩm quyền phê duyệt luôn được gọi là **Approval Matrix (AM)**.
+  - Tuyệt đối không dùng thuật ngữ "Authority Matrix".
   - Không sử dụng đơn thuần các thuật ngữ kỹ thuật thuần túy như "RBAC" trong các tài liệu giao tiếp với Business / Stakeholders (PMO, BOM, Khối nghiệp vụ).
-  - Đề mục chuẩn trong BRD/URD/PRD: **"Cấu Trúc Vai Trò & Ma Trận Phân Quyền (Authority Matrix - AM)"** hoặc **"Ma Trận Thẩm Quyền & Phân Quyền (AM)"**.
+  - Đề mục chuẩn trong BRD/URD/PRD/SOP14: **"Ma Trận Thẩm Quyền Phê Duyệt (Approval Matrix - AM)"** hoặc **"Ma Trận Phê Duyệt (Approval Matrix - AM)"** hoặc **"Ma Trận AM"**.
 
 ## 2. Verified Corporate Directory & Stakeholder Personas
 - **Giám đốc Bộ phận Quản lý CĐS (Task Giver):** **Ms. Trang** (Hồ Thị Trang - ITC-NVG) | Email: `itc.gdbp.4@novagroup.vn`

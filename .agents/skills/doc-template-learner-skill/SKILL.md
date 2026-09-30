@@ -71,7 +71,7 @@ Phase 5: PARITY AUDIT & HANDOVER → Verify 100% structural alignment & NVG AM c
 ---
 
 ## Mandatory Quality Rules for Generated BRDs:
-1. **Authority Matrix Terminology**: Bắt buộc chuẩn hóa thẩm quyền phê duyệt thành **"AM" (Authority Matrix)**. Tuyệt đối không dùng thuật ngữ phân quyền chung chung khi giao tiếp với Stakeholders NVG.
+1. **Approval Matrix Terminology**: Bắt buộc chuẩn hóa thẩm quyền phê duyệt thành **"AM" (Approval Matrix)**. Tuyệt đối không dùng *Authority Matrix* (NovaGroup không sử dụng thuật ngữ này). Không dùng thuật ngữ phân quyền chung chung khi giao tiếp với Stakeholders NVG.
 2. **Enterprise NDA Sanitization**: Tự động ẩn danh hóa thông tin nhân sự ngoài danh bạ đã xác thực (`Ms. Trang`, `Ms. Tú`, `Ms. Khanh`, `Minh`).
 3. **Internal Links Integrity**: Mọi liên kết chéo nội bộ `[link](...)` phải trỏ chính xác đến các file tồn tại trong `docs/`.
 4. **Mermaid Diagrams**: Mọi sơ đồ luồng quy trình phải hợp lệ cú pháp Mermaid 100%.

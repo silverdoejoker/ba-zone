@@ -135,7 +135,7 @@ Script audit sẽ chặn và báo lỗi nếu phát hiện các từ sai chính 
 - Bị chặn nếu chứa chuỗi ký tự vỡ font do sai encoding (ví dụ `Ä‘`, `Ã¡`, `Ãª`, `á»`, `Ã´`).
 
 ### 3. Chuẩn Mực Thuật Ngữ Nghiệp Vụ NVG (Mandatory Terminology)
-- **Ma trận phân quyền & thẩm quyền:** Bắt buộc dùng thuật ngữ **"AM" (Authority Matrix)** hoặc **"Ma trận AM"**. Không dùng thuật ngữ kỹ thuật thuần túy như "RBAC" trong trao đổi và đề mục tài liệu với Stakeholders.
+- **Ma trận phê duyệt & thẩm quyền:** Bắt buộc dùng thuật ngữ **"AM" (Approval Matrix)** hoặc **"Ma trận AM"** (Ma trận Phê duyệt / Ma trận Thẩm quyền Phê duyệt). Tuyệt đối **KHÔNG dùng "Authority Matrix"** (NovaGroup không sử dụng thuật ngữ này). Không dùng thuật ngữ kỹ thuật thuần túy như "RBAC" trong trao đổi và đề mục tài liệu với Stakeholders.
 - **Ranh giới Dev Architecture Spine 2026:**
   - Tách bạch 2 tầng: **Quyền chức năng (Functional Permissions)** và **Phạm vi dữ liệu (Security L7 Data Scope)**.
   - Prefix bảng CSDL: `{prefix}_` (ví dụ `tas_*`, `gms_*`).

@@ -374,7 +374,7 @@ def check_dev_architecture_spine(content, filepath, res):
     """
     Verifies compliance with Dev Architecture Spine Baseline 2026:
     - Zero Local Auth (SSO Gateway Policy)
-    - Authority Matrix (AM) & Security L7 Data Scope separation
+    - Approval Matrix (AM) & Security L7 Data Scope separation
     - Table Prefix {prefix}_ (e.g. gms_*, tas_*)
     - Strict Soft-Delete Invariant (Zero Hard-Delete)
     - Async Processing for Heavy Batch Operations
@@ -391,11 +391,14 @@ def check_dev_architecture_spine(content, filepath, res):
         if re.search(pat, content_lower):
             res.add_warning("Phát hiện mô tả chức năng auth nội bộ cục bộ. Dev Spine quy định Zero Local Auth: 100% người dùng nội bộ đi qua application-gateway + SSO MS Entra.")
 
-    # 2. Authority Matrix (AM) & Data Scope
-    has_am = any(k in content_lower for k in ["authority matrix", "ma trận am", "ma trận phân quyền", "phân quyền & thẩm quyền"])
+    # 2. Approval Matrix (AM) & Data Scope
+    if "authority matrix" in content_lower:
+        res.add_warning("Phát hiện thuật ngữ 'Authority Matrix'. Tại NovaGroup không dùng thuật ngữ này, AM chuẩn là 'Approval Matrix'.")
+
+    has_am = any(k in content_lower for k in ["approval matrix", "ma trận am", "ma trận phân quyền", "phân quyền & thẩm quyền", "ma trận phê duyệt", "thẩm quyền phê duyệt"])
     if has_am:
-        if "rbac" in content_lower and "am" not in content_lower and "authority matrix" not in content_lower:
-            res.add_warning("Thuật ngữ phân quyền nên chuẩn hóa thành 'Ma trận Phân quyền & Thẩm quyền (AM)' theo quy ước NVG.")
+        if "rbac" in content_lower and "am" not in content_lower and "approval matrix" not in content_lower:
+            res.add_warning("Thuật ngữ phân quyền nên chuẩn hóa thành 'Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM)' theo quy ước NVG.")
         
         has_data_scope = any(k in content_lower for k in ["data scope", "phạm vi dữ liệu", "security l7", "phạm vi cho phép"])
         if has_data_scope:
@@ -465,11 +468,11 @@ def audit_brd(content, filepath, res):
     else:
         res.add_pass("Danh mục phân hệ chức năng cốt lõi đầy đủ.")
 
-    # 5. Authority Matrix (AM)
-    if not any(k in content_lower for k in ["authority matrix", "ma trận phân quyền", "phân quyền", "rbac", " ma trận am", "(am)"]):
-        res.add_warning("BRD thiếu Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM).")
+    # 5. Approval Matrix (AM)
+    if not any(k in content_lower for k in ["approval matrix", "ma trận phân quyền", "phân quyền", "rbac", " ma trận am", "(am)", "ma trận phê duyệt"]):
+        res.add_warning("BRD thiếu Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM).")
     else:
-        res.add_pass("Ma trận Phân quyền & Thẩm quyền (AM) đã được thiết lập.")
+        res.add_pass("Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM) đã được thiết lập.")
 
     # 6. Fit-Gap Analysis
     if "fit-gap" in content_lower or "khoảng trống" in content_lower or "kế thừa" in content_lower:

@@ -66,8 +66,8 @@ timeline
   `Cấp Tập đoàn` $\rightarrow$ `Cấp TCT/BU` $\rightarrow$ `Cấp Khối/Ban` $\rightarrow$ `Cấp Phòng/Trung tâm` $\rightarrow$ `Cấp Nhóm/Team` $\rightarrow$ `Cấp Cá nhân`.
 - **Nguyên tắc Ràng buộc Trọng số**: Tổng trọng số KPI của các mục tiêu tại bất kỳ cấp nào **phải tròn 100%**.
 
-### 3.2 Quy chuẩn Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)
-Mọi tài liệu thiết kế hệ thống, SRS và Use Case trên One Nova bắt buộc phải định nghĩa **Bảng AM (Authority Matrix)** thay thế cho khái niệm phân quyền thông thường:
+### 3.2 Quy chuẩn Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM)
+Mọi tài liệu thiết kế hệ thống, SRS và Use Case trên One Nova bắt buộc phải định nghĩa **Bảng AM (Approval Matrix)** thay thế cho khái niệm phân quyền thông thường:
 
 | Vai trò / Chức danh | Hạn mức Thẩm quyền Phê duyệt | Quyền Thao tác trên System | Luồng Ủy quyền / Thay thế |
 |---|---|---|---|

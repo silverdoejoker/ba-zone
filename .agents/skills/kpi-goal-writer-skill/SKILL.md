@@ -53,7 +53,7 @@ Trigger this skill whenever the user needs to:
 **✅ Safe milestones (BA Controls):**
 - BRD/URD/SRS document completion & approval
 - Use Cases / User Stories authoring
-- Ma trận Phân quyền & Thẩm quyền (Authority Matrix - AM)
+- Ma trận Thẩm quyền Phê duyệt (Approval Matrix - AM)
 - Wireframe / Prototype design & sign-off
 - UAT Test Cases Matrix & User Guide **preparation** (NOT execution)
 - Gap Analysis Report / Fit-Gap Matrix
@@ -219,7 +219,7 @@ After generating all KPI forms, validate against this checklist:
 
 ## NVG Terminology Conventions (Inherited)
 
-- **Ma trận Phân quyền & Thẩm quyền** → Always use **"Ma trận AM"** (Authority Matrix).
+- **Ma trận Thẩm quyền Phê duyệt** → Always use **"Ma trận AM"** (Approval Matrix; ban "Authority Matrix").
 - **Tài liệu Yêu cầu Nghiệp vụ** → **BRD** (Business Requirements Document).
 - **Tài liệu Đặc tả Chi tiết** → **SRS** (Software Requirements Specification).
 - **Hồ sơ Kiểm thử Nghiệm thu** → **UAT Package** (Test Cases Matrix + User Guide).
