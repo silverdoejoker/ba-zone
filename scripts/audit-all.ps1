@@ -1,3 +1,42 @@
+<#
+.SYNOPSIS
+    Compounding Loop Master Auditor (BA Zone)
+    Tập lệnh điều phối kiểm định chất lượng toàn diện 5-Tier cho tài liệu BA,
+    đặc tả Use Case, User Story, biên bản UAT và tiêu chuẩn tài liệu xuất bản NVG.
+
+.DESCRIPTION
+    Hợp nhất toàn diện Master Auditor vào thư mục scripts/.
+    Tập lệnh tự động dò tìm Python runtime, hỗ trợ chạy toàn bộ hoặc chạy riêng lẻ từng Suite.
+
+.PARAMETER Suite
+    Tùy chọn Suite kiểm định cần chạy:
+    - 'all' (mặc định): Chạy cả 5 suites
+    - '1' hoặc 'hygiene': Suite 1 - Repo Hygiene & Chống rò rỉ Prototype/Mockup/Build
+    - '2' hoặc 'uc':      Suite 2 - Tiêu chuẩn Use Case (Karl Wiegers / IIBA 16 trường)
+    - '3' hoặc 'us':      Suite 3 - Tiêu chuẩn User Story & AC (INVEST + Gherkin)
+    - '4' hoặc 'uat':     Suite 4 - Tiêu chuẩn Web App UAT (TrọBill Methodology)
+    - '5' hoặc 'outputs': Suite 5 - Kiểm định tài liệu thực tế (docs/outputs/)
+
+.EXAMPLE
+    .\scripts\audit-all.ps1
+    .\scripts\audit-all.ps1 -Suite 5
+    .\scripts\audit-all.ps1 outputs
+#>
+
+[CmdletBinding()]
+param (
+    [Parameter(Position = 0, Mandatory = $false)]
+    [ValidateSet("all", "1", "2", "3", "4", "5", "hygiene", "uc", "us", "uat", "outputs")]
+    [string]$Suite = "all",
+
+    [switch]$Help
+)
+
+if ($Help) {
+    Get-Help $MyInvocation.MyCommand.Path -Full
+    exit 0
+}
+
 $ErrorActionPreference = "Stop"
 
 # Set encoding to UTF-8
@@ -7,6 +46,7 @@ Write-Host "============================================================" -Foreg
 Write-Host "         COMPOUNDING LOOP MASTER AUDITOR (BA ZONE)          " -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "Running comprehensive audits to ensure requirements standard..." -ForegroundColor Gray
+Write-Host "Execution Scope: Suite [$Suite]" -ForegroundColor DarkCyan
 
 # Root of the ba-zone repository (parent directory of scripts/)
 $RepoRoot = Split-Path $PSScriptRoot -Parent
@@ -39,8 +79,16 @@ $candidates = @(
     "C:\Program Files\Unity\Hub\Editor\6000.6.0f1\Editor\Data\PlaybackEngines\WebGLSupport\BuildTools\Emscripten\python\python.exe",
     "$env:LOCALAPPDATA\Programs\Python\Python313\python.exe",
     "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe",
-    "$env:LOCALAPPDATA\Programs\Python\Python311\python.exe"
+    "$env:LOCALAPPDATA\Programs\Python\Python311\python.exe",
+    "C:\Python312\python.exe",
+    "C:\Python311\python.exe",
+    "C:\Python310\python.exe"
 )
+
+$cmdPython = Get-Command python -ErrorAction SilentlyContinue
+if ($cmdPython -and $cmdPython.Source) {
+    $candidates = @($cmdPython.Source) + $candidates
+}
 
 foreach ($c in $candidates) {
     try {
@@ -61,160 +109,182 @@ if (-not $pythonExe) {
 # ----------------------------------------------------------------------
 # SUITE 1: Repository Hygiene & No Prototype/Build Committed Policy
 # ----------------------------------------------------------------------
-Write-Host "`n[1/5] Auditing Repo Hygiene & Leak Prevention (scripts/audit_hygiene.py)..." -ForegroundColor White
-try {
-    $scriptPath = Join-Path $PSScriptRoot "audit_hygiene.py"
-    $output = & $pythonExe $scriptPath 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "  -> FAIL: Repository hygiene or prototype leakage detected!" -ForegroundColor Red
-        Write-Host $output
-        Add-Result "Repo Hygiene & No Prototype Builds" $false "Forbidden files tracked or .gitignore rule missing"
-    } else {
-        Write-Host "  -> PASS: Repository is clean, 0 prototype/build files tracked in Git." -ForegroundColor Green
-        Add-Result "Repo Hygiene & No Prototype Builds" $true "100% compliant (.gitignore & git index clean)"
+if ($Suite -in @("all", "1", "hygiene")) {
+    Write-Host "`n[1/5] Auditing Repo Hygiene & Leak Prevention (scripts/audit_hygiene.py)..." -ForegroundColor White
+    try {
+        $scriptPath = Join-Path $PSScriptRoot "audit_hygiene.py"
+        $output = & $pythonExe $scriptPath 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  -> FAIL: Repository hygiene or prototype leakage detected!" -ForegroundColor Red
+            Write-Host $output
+            Add-Result "Repo Hygiene & No Prototype Builds" $false "Forbidden files tracked or .gitignore rule missing"
+        } else {
+            Write-Host "  -> PASS: Repository is clean, 0 prototype/build files tracked in Git." -ForegroundColor Green
+            Add-Result "Repo Hygiene & No Prototype Builds" $true "100% compliant (.gitignore & git index clean)"
+        }
+    } catch {
+        Write-Host "  -> ERROR: $_" -ForegroundColor Red
+        Add-Result "Repo Hygiene & No Prototype Builds" $false $_.Exception.Message
     }
-} catch {
-    Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Add-Result "Repo Hygiene & No Prototype Builds" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
 # SUITE 2: Use Case Standard & Format Integrity (Karl Wiegers / IIBA 16 Fields)
 # ----------------------------------------------------------------------
-Write-Host "`n[2/5] Auditing Use Case Template & Quality Integrity (scripts/audit_uc.py)..." -ForegroundColor White
-try {
-    $scriptPath = Join-Path $PSScriptRoot "audit_uc.py"
-    $testFiles = @(
-        (Join-Path $RepoRoot "use-case-writer-skill\samples\sample_uc_en.md"),
-        (Join-Path $RepoRoot "use-case-writer-skill\samples\sample_uc_vi.md")
-    )
+if ($Suite -in @("all", "2", "uc")) {
+    Write-Host "`n[2/5] Auditing Use Case Template & Quality Integrity (scripts/audit_uc.py)..." -ForegroundColor White
+    try {
+        $scriptPath = Join-Path $PSScriptRoot "audit_uc.py"
+        $potentialFiles = @(
+            (Join-Path $RepoRoot "use-case-writer-skill\samples\sample_uc_en.md"),
+            (Join-Path $RepoRoot "use-case-writer-skill\samples\sample_uc_vi.md"),
+            (Join-Path $RepoRoot ".agents\skills\use-case-writer-skill\samples\sample_uc_en.md"),
+            (Join-Path $RepoRoot ".agents\skills\use-case-writer-skill\samples\sample_uc_vi.md")
+        )
+        $testFiles = $potentialFiles | Where-Object { Test-Path $_ } | Select-Object -Unique
 
-    $suiteSuccess = $true
-    foreach ($file in $testFiles) {
-        if (Test-Path $file) {
-            Write-Host "  -> Auditing file: $($file | Split-Path -Leaf)" -ForegroundColor Gray
-            $output = & $pythonExe $scriptPath --file $file 2>&1
-            if ($LASTEXITCODE -ne 0) {
-                Write-Host "  -> FAIL: Validation issues found in $($file | Split-Path -Leaf)!" -ForegroundColor Red
-                Write-Host $output
-                $suiteSuccess = $false
-            } else {
-                Write-Host "  -> PASS: $($file | Split-Path -Leaf) is 100% compliant." -ForegroundColor Green
-            }
+        $suiteSuccess = $true
+        if ($testFiles.Count -eq 0) {
+            Write-Host "  -> WARN: No sample Use Case files found to audit." -ForegroundColor Yellow
+            Add-Result "Use Case Standards (IIBA 16 Fields)" $false "No sample files found"
         } else {
-            Write-Host "  -> WARN: Sample file not found ($file)" -ForegroundColor Yellow
-        }
-    }
+            foreach ($file in $testFiles) {
+                Write-Host "  -> Auditing file: $($file | Split-Path -Leaf)" -ForegroundColor Gray
+                $output = & $pythonExe $scriptPath --file $file 2>&1
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Host "  -> FAIL: Validation issues found in $($file | Split-Path -Leaf)!" -ForegroundColor Red
+                    Write-Host $output
+                    $suiteSuccess = $false
+                } else {
+                    Write-Host "  -> PASS: $($file | Split-Path -Leaf) is 100% compliant." -ForegroundColor Green
+                }
+            }
 
-    if ($suiteSuccess) {
-        Add-Result "Use Case Standards (IIBA 16 Fields)" $true "All sample files passed 100%"
-    } else {
-        Add-Result "Use Case Standards (IIBA 16 Fields)" $false "Formatting or standard violations detected"
+            if ($suiteSuccess) {
+                Add-Result "Use Case Standards (IIBA 16 Fields)" $true "All sample files passed 100%"
+            } else {
+                Add-Result "Use Case Standards (IIBA 16 Fields)" $false "Formatting or standard violations detected"
+            }
+        }
+    } catch {
+        Write-Host "  -> ERROR: $_" -ForegroundColor Red
+        Add-Result "Use Case Standards (IIBA 16 Fields)" $false $_.Exception.Message
     }
-} catch {
-    Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Add-Result "Use Case Standards (IIBA 16 Fields)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
 # SUITE 3: User Story & AC Specification Integrity (INVEST + Gherkin)
 # ----------------------------------------------------------------------
-Write-Host "`n[3/5] Auditing User Story & AC Specification Integrity (scripts/audit_us.py)..." -ForegroundColor White
-try {
-    $scriptPath = Join-Path $PSScriptRoot "audit_us.py"
-    $testFiles = @(
-        (Join-Path $RepoRoot "user-story-writer-skill\samples\sample_us_en.md"),
-        (Join-Path $RepoRoot "user-story-writer-skill\samples\sample_us_vi.md")
-    )
+if ($Suite -in @("all", "3", "us")) {
+    Write-Host "`n[3/5] Auditing User Story & AC Specification Integrity (scripts/audit_us.py)..." -ForegroundColor White
+    try {
+        $scriptPath = Join-Path $PSScriptRoot "audit_us.py"
+        $potentialFiles = @(
+            (Join-Path $RepoRoot "user-story-writer-skill\samples\sample_us_en.md"),
+            (Join-Path $RepoRoot "user-story-writer-skill\samples\sample_us_vi.md"),
+            (Join-Path $RepoRoot ".agents\skills\user-story-writer-skill\samples\sample_us_en.md"),
+            (Join-Path $RepoRoot ".agents\skills\user-story-writer-skill\samples\sample_us_vi.md")
+        )
+        $testFiles = $potentialFiles | Where-Object { Test-Path $_ } | Select-Object -Unique
 
-    $suiteSuccess = $true
-    foreach ($file in $testFiles) {
-        if (Test-Path $file) {
-            Write-Host "  -> Auditing file: $($file | Split-Path -Leaf)" -ForegroundColor Gray
-            $output = & $pythonExe $scriptPath --file $file 2>&1
-            if ($LASTEXITCODE -ne 0) {
-                Write-Host "  -> FAIL: Validation issues found in $($file | Split-Path -Leaf)!" -ForegroundColor Red
-                Write-Host $output
-                $suiteSuccess = $false
-            } else {
-                Write-Host "  -> PASS: $($file | Split-Path -Leaf) is 100% compliant." -ForegroundColor Green
-            }
+        $suiteSuccess = $true
+        if ($testFiles.Count -eq 0) {
+            Write-Host "  -> WARN: No sample User Story files found to audit." -ForegroundColor Yellow
+            Add-Result "User Story & AC (INVEST + Gherkin)" $false "No sample files found"
         } else {
-            Write-Host "  -> WARN: Sample file not found ($file)" -ForegroundColor Yellow
-        }
-    }
+            foreach ($file in $testFiles) {
+                Write-Host "  -> Auditing file: $($file | Split-Path -Leaf)" -ForegroundColor Gray
+                $output = & $pythonExe $scriptPath --file $file 2>&1
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Host "  -> FAIL: Validation issues found in $($file | Split-Path -Leaf)!" -ForegroundColor Red
+                    Write-Host $output
+                    $suiteSuccess = $false
+                } else {
+                    Write-Host "  -> PASS: $($file | Split-Path -Leaf) is 100% compliant." -ForegroundColor Green
+                }
+            }
 
-    if ($suiteSuccess) {
-        Add-Result "User Story & AC (INVEST + Gherkin)" $true "All sample files passed 100%"
-    } else {
-        Add-Result "User Story & AC (INVEST + Gherkin)" $false "Formatting or standard violations detected"
+            if ($suiteSuccess) {
+                Add-Result "User Story & AC (INVEST + Gherkin)" $true "All sample files passed 100%"
+            } else {
+                Add-Result "User Story & AC (INVEST + Gherkin)" $false "Formatting or standard violations detected"
+            }
+        }
+    } catch {
+        Write-Host "  -> ERROR: $_" -ForegroundColor Red
+        Add-Result "User Story & AC (INVEST + Gherkin)" $false $_.Exception.Message
     }
-} catch {
-    Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Add-Result "User Story & AC (INVEST + Gherkin)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
 # SUITE 4: Web App UAT & Live Experience Integrity (scripts/audit_uat.py)
 # ----------------------------------------------------------------------
-Write-Host "`n[4/5] Auditing Web App UAT & Live Experience Integrity (scripts/audit_uat.py)..." -ForegroundColor White
-try {
-    $scriptPath = Join-Path $PSScriptRoot "audit_uat.py"
-    $testFiles = @(
-        (Join-Path $RepoRoot "web-app-uat-skill\samples\sample_uat_report_en.md"),
-        (Join-Path $RepoRoot "web-app-uat-skill\samples\sample_uat_report_vi.md")
-    )
+if ($Suite -in @("all", "4", "uat")) {
+    Write-Host "`n[4/5] Auditing Web App UAT & Live Experience Integrity (scripts/audit_uat.py)..." -ForegroundColor White
+    try {
+        $scriptPath = Join-Path $PSScriptRoot "audit_uat.py"
+        $potentialFiles = @(
+            (Join-Path $RepoRoot "web-app-uat-skill\samples\sample_uat_report_en.md"),
+            (Join-Path $RepoRoot "web-app-uat-skill\samples\sample_uat_report_vi.md"),
+            (Join-Path $RepoRoot ".agents\skills\web-app-uat-skill\samples\sample_uat_report_en.md"),
+            (Join-Path $RepoRoot ".agents\skills\web-app-uat-skill\samples\sample_uat_report_vi.md")
+        )
+        $testFiles = $potentialFiles | Where-Object { Test-Path $_ } | Select-Object -Unique
 
-    $suiteSuccess = $true
-    foreach ($file in $testFiles) {
-        if (Test-Path $file) {
-            Write-Host "  -> Auditing file: $($file | Split-Path -Leaf)" -ForegroundColor Gray
-            $output = & $pythonExe $scriptPath --file $file 2>&1
-            if ($LASTEXITCODE -ne 0) {
-                Write-Host "  -> FAIL: Validation issues found in $($file | Split-Path -Leaf)!" -ForegroundColor Red
-                Write-Host $output
-                $suiteSuccess = $false
-            } else {
-                Write-Host "  -> PASS: $($file | Split-Path -Leaf) is 100% compliant." -ForegroundColor Green
-            }
+        $suiteSuccess = $true
+        if ($testFiles.Count -eq 0) {
+            Write-Host "  -> WARN: No sample UAT report files found to audit." -ForegroundColor Yellow
+            Add-Result "Web App UAT (TrọBill Methodology)" $false "No sample files found"
         } else {
-            Write-Host "  -> WARN: Sample file not found ($file)" -ForegroundColor Yellow
-        }
-    }
+            foreach ($file in $testFiles) {
+                Write-Host "  -> Auditing file: $($file | Split-Path -Leaf)" -ForegroundColor Gray
+                $output = & $pythonExe $scriptPath --file $file 2>&1
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Host "  -> FAIL: Validation issues found in $($file | Split-Path -Leaf)!" -ForegroundColor Red
+                    Write-Host $output
+                    $suiteSuccess = $false
+                } else {
+                    Write-Host "  -> PASS: $($file | Split-Path -Leaf) is 100% compliant." -ForegroundColor Green
+                }
+            }
 
-    if ($suiteSuccess) {
-        Add-Result "Web App UAT (TrọBill Methodology)" $true "All sample files passed 100%"
-    } else {
-        Add-Result "Web App UAT (TrọBill Methodology)" $false "Formatting or standard violations detected"
+            if ($suiteSuccess) {
+                Add-Result "Web App UAT (TrọBill Methodology)" $true "All sample files passed 100%"
+            } else {
+                Add-Result "Web App UAT (TrọBill Methodology)" $false "Formatting or standard violations detected"
+            }
+        }
+    } catch {
+        Write-Host "  -> ERROR: $_" -ForegroundColor Red
+        Add-Result "Web App UAT (TrọBill Methodology)" $false $_.Exception.Message
     }
-} catch {
-    Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Add-Result "Web App UAT (TrọBill Methodology)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
 # SUITE 5: Real Output Documents Quality & Standard Integrity (scripts/audit_outputs.py)
 # ----------------------------------------------------------------------
-Write-Host "`n[5/5] Auditing Real Output Documents & Standards (scripts/audit_outputs.py)..." -ForegroundColor White
-try {
-    $scriptPath = Join-Path $PSScriptRoot "audit_outputs.py"
-    if (Test-Path $scriptPath) {
-        $output = & $pythonExe $scriptPath 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            Write-Host "  -> FAIL: Output documents failed standard compliance!" -ForegroundColor Red
-            Write-Host $output
-            Add-Result "Output Docs (AM/BRD/NDA/Dev Spine)" $false "Discrepancies found in docs/outputs/"
+if ($Suite -in @("all", "5", "outputs")) {
+    Write-Host "`n[5/5] Auditing Real Output Documents & Standards (scripts/audit_outputs.py)..." -ForegroundColor White
+    try {
+        $scriptPath = Join-Path $PSScriptRoot "audit_outputs.py"
+        if (Test-Path $scriptPath) {
+            $output = & $pythonExe $scriptPath 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "  -> FAIL: Output documents failed standard compliance!" -ForegroundColor Red
+                Write-Host $output
+                Add-Result "Output Docs (AM/BRD/NDA/Dev Spine)" $false "Discrepancies found in docs/outputs/"
+            } else {
+                Write-Host "  -> PASS: All output documents in docs/outputs/ comply 100% with standards." -ForegroundColor Green
+                Add-Result "Output Docs (AM/BRD/NDA/Dev Spine)" $true "All output files passed 100%"
+            }
         } else {
-            Write-Host "  -> PASS: All output documents in docs/outputs/ comply 100% with standards." -ForegroundColor Green
-            Add-Result "Output Docs (AM/BRD/NDA/Dev Spine)" $true "All output files passed 100%"
+            Write-Host "  -> WARN: scripts/audit_outputs.py not found" -ForegroundColor Yellow
+            Add-Result "Output Documents Standards (AM/BRD/NDA)" $false "Script missing"
         }
-    } else {
-        Write-Host "  -> WARN: scripts/audit_outputs.py not found" -ForegroundColor Yellow
-        Add-Result "Output Documents Standards (AM/BRD/NDA)" $false "Script missing"
+    } catch {
+        Write-Host "  -> ERROR: $_" -ForegroundColor Red
+        Add-Result "Output Documents Standards (AM/BRD/NDA)" $false $_.Exception.Message
     }
-} catch {
-    Write-Host "  -> ERROR: $_" -ForegroundColor Red
-    Add-Result "Output Documents Standards (AM/BRD/NDA)" $false $_.Exception.Message
 }
 
 # ----------------------------------------------------------------------
@@ -224,15 +294,19 @@ Write-Host "`n============================================================" -For
 Write-Host "                  AUDIT SUMMARY REPORT                      " -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 
-foreach ($r in $suiteResults) {
-    $statusText = if ($r.Passed) { "[PASS]" } else { "[FAIL]" }
-    $color = if ($r.Passed) { "Green" } else { "Red" }
-    Write-Host ("{0,-38} : {1,-8} ({2})" -f $r.Suite, $statusText, $r.Detail) -ForegroundColor $color
+if ($suiteResults.Count -eq 0) {
+    Write-Host "No audit suites were executed for scope: $Suite" -ForegroundColor Yellow
+} else {
+    foreach ($r in $suiteResults) {
+        $statusText = if ($r.Passed) { "[PASS]" } else { "[FAIL]" }
+        $color = if ($r.Passed) { "Green" } else { "Red" }
+        Write-Host ("{0,-38} : {1,-8} ({2})" -f $r.Suite, $statusText, $r.Detail) -ForegroundColor $color
+    }
 }
 
 Write-Host "============================================================" -ForegroundColor Cyan
-if ($allPassed) {
-    Write-Host "   🎉 RESULT: ALL COMPOUNDING LOOP AUDITS PASSED 100%!     " -ForegroundColor Green
+if ($allPassed -and $suiteResults.Count -gt 0) {
+    Write-Host "   🎉 RESULT: ALL EXECUTED AUDITS PASSED 100%!              " -ForegroundColor Green
     Write-Host "============================================================`n" -ForegroundColor Cyan
     exit 0
 } else {

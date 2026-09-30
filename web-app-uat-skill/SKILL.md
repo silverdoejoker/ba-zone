@@ -194,7 +194,7 @@ Script sẽ tự động:
 - Tự động kết xuất khung báo cáo UAT nghiệm thu nếu có tham số `--export-report <path>`.
 
 ### 2. Chế độ Kiểm Định Báo Cáo Nghiệm Thu (`--file`)
-Dùng trong quy trình kiểm soát chất lượng CI/CD hoặc chạy trong `audit-all.ps1`:
+Dùng trong quy trình kiểm soát chất lượng CI/CD hoặc chạy trong `scripts/audit-all.ps1`:
 ```powershell
 python scripts/audit_uat.py --file web-app-uat-skill/samples/sample_uat_report_vi.md
 ```

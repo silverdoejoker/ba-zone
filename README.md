@@ -43,12 +43,13 @@ ba-zone/
 ├── scratch/                         # Vùng nháp tạm thời (Scratchpad - Drop sau khi hoàn thành task)
 │
 ├── scripts/                         # Bộ công cụ kiểm thử chất lượng tự động (Auditors)
+│   ├── audit-all.ps1                # Master Compounding Loop Auditor (PowerShell runner 5-Tier)
 │   ├── audit_hygiene.py             # Script kiểm định chống rò rỉ mockup build & bảo vệ NDA
 │   ├── audit_uc.py                  # Script kiểm tra chuẩn 16 trường & quy tắc Cockburn
 │   ├── audit_us.py                  # Script kiểm tra tiêu chuẩn INVEST & 3 kịch bản Gherkin
-│   └── audit_uat.py                 # Script kiểm định báo cáo UAT & Live Web App Probe Runner
+│   ├── audit_uat.py                 # Script kiểm định báo cáo UAT & Live Web App Probe Runner
+│   └── audit_outputs.py             # Script kiểm định tài liệu đầu ra chuẩn NVG & Dev Architecture
 │
-├── audit-all.ps1                    # Master Compounding Loop Auditor (PowerShell runner)
 ├── CHANGELOG.md                     # Lịch sử phiên bản & thay đổi
 └── README.md                        # Tài liệu hướng dẫn sử dụng repository
 ```

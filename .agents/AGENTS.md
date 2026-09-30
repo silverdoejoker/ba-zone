@@ -76,12 +76,12 @@ This directory (`.agents/`) defines project-specific custom agent rules, quality
 
 ## Strict Repository Policy: Documentation Only (Zero Prototype/Build Leakage)
 - **Repository Boundary**: This repository is strictly for Business Analysis specifications, PRD/BRD documents, test plans, and templates.
-- **Prototypes & Mockups**: All interactive prototypes or mockup files built under `prototypes/`, `mockups/`, or build bundles (`dist/`, `build/`, `node_modules/`) must **NEVER** be committed to Git.
+- **Prototypes & Mockups**: Khi Agent hoặc User tạo các file mockup/prototype (HTML/JS/CSS) phục vụ mục đích demo, **bắt buộc** phải lưu vào thư mục `prototypes/`. All interactive prototypes or mockup files built under `prototypes/`, `mockups/`, or build bundles (`dist/`, `build/`, `node_modules/`) must **NEVER** be committed to Git.
 - **Enterprise NDA & Client Isolation**:
   - `docs/inputs/` (Raw client documents), `docs/outputs/` (Working exports/meeting checklists), and `docs/projects/` (Client project workspaces with PII/emails) are strictly local-only and ignored in `.gitignore`.
   - Only sanitized templates in `docs/templates/` and methodology guides in `docs/guidelines/` are tracked.
   - All office binaries (`*.docx`, `*.doc`, `*.pdf`, `*.xlsx`, `*.pptx`, `*.vsdx`) are permanently ignored across the repository.
-- **Enforcement**: Automated audit script `scripts/audit_hygiene.py` runs in `audit-all.ps1` to detect and block any accidental commits of prototype or confidential client files.
+- **Enforcement**: Automated audit script `scripts/audit_hygiene.py` runs in `scripts/audit-all.ps1` to detect and block any accidental commits of prototype or confidential client files.
 
 ## Scratch Script Lifecycle & Cleanup Policy (`scratch/`)
 - **Tạo script tạm**: Mọi script phân tích raw data, cào dữ liệu mẫu, hoặc debug tạm thời trong quá trình thực thi phải được tạo trong `scratch/`.
