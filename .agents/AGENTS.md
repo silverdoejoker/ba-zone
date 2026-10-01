@@ -143,6 +143,12 @@ Mỗi khi Agent tạo mới hoặc chỉnh sửa bất kỳ tài liệu nào tro
   - Ms. Tú (Chuyên gia Quản lý Dự án - PMO): `itc.cg.3@novagroup.vn` | SĐT: `0397479999`
   - Ms. Khanh (Chuyên viên Cao cấp BA PM QLCH): `itc.cvcc.3@novagroup.vn` | SĐT: `0904884874`
   - Ms. Hân (Chuyên viên BA / Tác giả mẫu chuẩn NVL_ITD_SDD): Vũ Thị Hân (ITC-NVG)
+- **Quy chuẩn Soạn thảo Email Doanh nghiệp (Corporate Email Standards)**:
+  - Tuân thủ toàn diện [`.agents/rules/corporate_email_standards.md`](file:///d:/repo/ba-zone/.agents/rules/corporate_email_standards.md).
+  - Phong cách: Bình đẳng, chuyên nghiệp, đi thẳng vào vấn đề (Direct & Concise, 3–5 câu).
+  - Chào đầu: `Dear anh/chị [Tên] và Anh/Chị,` hoặc `Kính gửi...`.
+  - Cấm tiệt phong cách khúm núm: Tuyệt đối không dùng "Dạ", "Thưa", "Dạ em chào", "Dạ vâng" và không kết câu bằng các từ đệm cảm thán (`...ạ`, `...nha`, `...nhé`).
+  - Danh xưng tập thể & Kết thư: Luôn dùng danh xưng chung là **`ITC`** (không dùng *Team BA* hay *Nhóm BA*); kết thư: `Trân trọng,` + Họ tên + `ITC`.
 - **Quy chuẩn Kiến trúc Kỹ thuật (Dev Architecture Baseline 2026)**:
   - Tuân thủ toàn diện các quy ước tại `.agents/rules/dev_architecture_conventions.md` và `docs/guidelines/ARCHITECTURE-SPINE.md`.
   - Zero Local Auth (SSO qua Application Gateway).

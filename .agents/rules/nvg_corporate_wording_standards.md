@@ -96,3 +96,12 @@ Theo chuẩn Ms. Hân (NVL_ITD_SDD trang 47-65), mọi sự kiện hệ thống 
   - **Khung hộp (Boxes):** **`12pt`**.
 - Không sử dụng font không chân (sans-serif) hoặc kích thước nhỏ dạng `13px` / `14px` làm phá vỡ chuẩn 12pt của tập đoàn.
 
+---
+
+## 7. Quy Chuẩn Soạn Thảo Email Doanh Nghiệp (Corporate Email Standards)
+Chi tiết tại: [`.agents/rules/corporate_email_standards.md`](file:///d:/repo/ba-zone/.agents/rules/corporate_email_standards.md)
+- **Phong thái:** Bình đẳng, gãy gọn, đi thẳng vào vấn đề (Direct & Concise, 3–5 câu).
+- **Mở đầu:** `Dear anh/chị [Tên] và Anh/Chị,` hoặc `Kính gửi anh/chị [Tên]...`.
+- **Cấm phong thái khúm núm:** Tuyệt đối không dùng "Dạ", "Thưa", "Dạ em chào", "Dạ vâng" và không kết câu bằng các từ đệm cảm thán (`...ạ`, `...nha`, `...nhé`).
+- **Danh xưng tập thể & Kết thư:** Luôn dùng danh xưng đại diện là **`ITC`** (không dùng *Team BA* / *Nhóm BA*); kết thư: `Trân trọng,` + Họ tên + `ITC`.
+
